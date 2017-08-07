@@ -1,0 +1,35 @@
+{
+  "name": "webpkr-doc",
+  "version": "1.0.0",
+  "description": "= Jekyll AsciiDoc Quickstart :toc:",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/venkatperi/webpkr-doc.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/venkatperi/webpkr-doc/issues"
+  },
+  "homepage": "https://github.com/venkatperi/webpkr-doc#readme",
+  "devDependencies": {
+    "babel-loader": "^7.1.1",
+    "css-loader": "^0.28.4",
+    "extract-text-webpack-plugin": "^3.0.0",
+    "foundation-sites": "^6.4.1",
+    "highlightjs": "^9.10.0",
+    "image-webpack-loader": "^3.3.1",
+    "jquery": "^3.2.1",
+    "modernizr": "https://modernizr.com/download?ambientlight-batteryapi-webp-setclasses",
+    "modernizr-webpack-plugin": "^1.0.6",
+    "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.4.1",
+    "webpkr": "^0.1.4"
+  }
+}
