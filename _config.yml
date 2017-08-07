@@ -1,5 +1,6 @@
 title: webpkr documentation
 description: webpkr - The webpack DSL
+
 exclude:
   - LICENSE.adoc
   - README.adoc
@@ -12,7 +13,10 @@ exclude:
   - node_modules
   - src
   - webpkr
+  - webpack.config.js
+
 asciidoc: {}
+
 asciidoctor:
   base_dir: :docdir
   safe: unsafe

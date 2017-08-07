@@ -10,6 +10,8 @@ output( () => {
 require( './vendor' )
 require( './js' )
 require( './css' )
+require( './scss' )
 require( './images' )
+require( './fonts' )
 require( './node' )
 require( './modernizr' )
