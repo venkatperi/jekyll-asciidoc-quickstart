@@ -1,0 +1,110 @@
+= Webpkr API
+:showtitle:
+:page-permalink: /api/
+
+== require
+```javascript
+webpkr = require('webpkr');
+```
+
+== webpkr(opts)
+
+Creates a new instance of `Webpkr` with the supplied options and calls `buildFile()` on it and returns the resulting `webpack` configuration.
+
+[cols="1a,1a,4a,2a", options="header"]
+|===
+| option | type | description | default
+
+
+| `opts.config`
+| `{String}`
+| The webpkr configuration module
+| `./webpkr`
+
+| `opts.projectDir`
+| `{String}`
+| The project directory.
+| `process.cwd()`
+
+| `opts.buildDir`
+| `{String}`
+| The build directory where output is written.
+| `projectDir/build`.
+
+| `opts.environments`
+| `{String[]}`
+| The `node.js` environments.
+| `['development', 'production', 'testing', 'staging']`.
+
+|===
+
+== webpkr.Webpkr
+
+=== Webpkr(opts)
+See `webpkr()` above for option details.
+
+=== Members
+
+==== compile(closure)
+- `closure` `{Function}` Contains the build script.
+- Returns `{Object}` the configuration tree.
+
+Compiles the supplied DSL build script into a configuration tree.
+
+.Example
+```javascript
+const { Webpkr } = require( '../' );
+const webpkr = new Webpkr();
+
+const tree = webpkr.compile( () => {
+  context( projectDir )
+  entry( './src/index.js' )
+  output( () => {
+    filename( 'bundle.js' )
+    path$( 'dist' )
+  } )
+} )
+
+// print configuration tree
+console.log( tree.toAsciiTree() );
+```
+
+.Output
+```bash
+└─webpackConfig, WebpackNodeExt, webpackConfig, [ undefined ]
+  ├─context, ContextNodeExt, context, [ '/Users/venkat/proj/repos...'
+  ├─entry, EntryNodeExt, entry, [ './src/index.js' ]
+  └─output, OutputNodeExt, output, [ undefined ]
+    ├─filename, FilenameNodeExt, node.__filename, [ 'bundle.js' ]
+    └─path$, PathNodeExt, output.path, [ 'dist' ]
+
+```
+
+==== compileFile(file)
+- `file` `{String}` path to file containing DSL build script
+- Returns `{Object}` the configuration tree.
+
+Loads the DSL build script from the supplied file and returns the compiled configuration tree. Relative paths are resolved from `projectDir`.
+
+
+==== buildFile(file)
+- `file` `{String}` path to file containing DSL build script
+- Returns `{Function}` `webpack` configuration.
+
+Loads the DSL build script from the supplied file, builds it and returns a `Function` which can be passed to `webpack`.
+
+[NOTE]
+The returned `Function` accepts a single parameter. The `webpack` CLI uses this parameter to pass commandline arguments set via `--env` to the configuration script. These arguments are avilable via a global object `cliArgs`.
+
+[TIP]
+When using the `webpack` Node API, the function must be called and the resulting object should be passed to `webpack()`.
+
+=== Events
+==== afterCompile
+Emitted after the DSL is compiled into a configuration tree. The tree is passed as the only argument to the event.
+
+==== afterNodeEvaluate
+Emitted during the evaluation phase, after each node is evaluated. The current node and its evaluated value are passed as arguments.
+
+==== afterEvaluate
+Emitted after the entire configuration tree is evaluated. The final `webpack` configuration object is passed as the only argument.

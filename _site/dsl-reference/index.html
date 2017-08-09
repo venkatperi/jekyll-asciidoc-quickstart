@@ -8,10 +8,8 @@
   <title>webpkr Build Language Reference</title>
   <meta name="description"
         content="webpkr - The webpack DSL">
-  <!--<script src="http://localhost:8080/vendor.js"></script>-->
-  <script src="/build/main.js"></script>
-  <!--<script src="http://localhost:8080/modernizr.js"></script>-->
-  <link rel="stylesheet" href="/build/style.css">
+  <script src="http://localhost:8080/main.js"></script>
+  <link rel="stylesheet" href="http://localhost:8080/style.css">
 </head>
 <body>
 
@@ -28,31 +26,46 @@
 
 
 <!-- Main Page Content and Sidebar -->
-<div class="row">
-  <aside class="main-toc medium-2 columns">
-    
-    
-    <h4><a href="http://localhost:8080//">Home</a></h4>
-    <ul class="nav">
+<div class="container">
+  <div class="row">
+    <aside class="sidebar main-toc small-2 columns">
       
-      <li><a href="http://localhost:8080//installation">Installation</a></li>
       
-      <li><a href="http://localhost:8080//features">Webpkr Features</a></li>
+      <h4><a href="/">Home</a></h4>
+      <ul class="nav">
+        
+        <li><a href="/installation">Installation</a></li>
+        
+        <li><a href="/dsl-reference">DSL Reference</a></li>
+        
+        <li><a href="/api">API</a></li>
+        
+        <li><a href="/examples">Examples</a></li>
+        
+      </ul>
       
-      <li><a href="http://localhost:8080//dsl-reference">DSL Reference</a></li>
       
-    </ul>
-    
-    
-    <div id="toc"></div>
-  </aside>
+      <div id="toc"></div>
+    </aside>
 
-  <div class="medium-10 columns" role="content">
-    <h1>webpkr Build Language Reference</h1>
+    <div class="small-9 columns" role="content">
+      <h1>webpkr Build Language Reference</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p>Webpkr scripts are <em>configuration scripts</em>. As the script executes, it configures a tree of configuration nodes. During the evaluation phase, tree nodes are evaluated to generate a <code>webpack</code> configuration object.</p>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Under Development.
+</td>
+</tr>
+</table>
 </div>
 </div>
 </div>
@@ -387,6 +400,7 @@ entry('./src/another.js')</code></pre>
 </div>
 </div>
 </div>
+    </div>
   </div>
 </div>
 

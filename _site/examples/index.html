@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Installation</title>
+  <title>Examples</title>
   <meta name="description"
         content="webpkr - The webpack DSL">
   <script src="http://localhost:8080/main.js"></script>
@@ -50,56 +50,20 @@
 
     <div class="small-9 columns" role="content">
       <div class="sect1">
-<h2 id="npm">npm</h2>
+<h2 id="examples">Examples</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>Install with <code>npm</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ npm install --save-dev webpkr</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="configure_webpack">Configure Webpack</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Create a <code>webpack.config.js</code> in your project&#8217;s root and add:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const webpkr = require('webpkr');
-module.exports = webpkr({projectDir: __dirname});</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="configure_webpkr">Configure Webpkr</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>By default, webpkr looks for config scripts in a <code>./webpkr</code> module. Create a <code>webpkr</code> subdirectory in your project&#8217;s root and add file <code>index.js</code> in it:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ mkdir webpkr
-$ touch webpkr/index.js</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Add the following DSL script to <code>webpkr/index.js</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">context( projectDir )
-entry( './src/index.js')
-output( () =&gt; {
-  filename( 'bundle.js' )
-  path$( 'dist' )
-} )</code></pre>
-</div>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="partition">Splitting Configuration into Multiple Files</a></p>
+</li>
+<li>
+<p><a href="vendor-bundle">Explicit Vendor Bundle</a></p>
+</li>
+<li>
+<p><a href="multi-env">Multiple Environments</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>

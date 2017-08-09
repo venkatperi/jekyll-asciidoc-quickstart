@@ -1,14 +1,13 @@
 = Installation
 :page-permalink: /installation/
 
-== Installation
+== npm
 
 Install with `npm`:
 
 ```bash
 $ npm install --save-dev webpkr
 ```
-
 
 == Configure Webpack
 Create a `webpack.config.js` in your project's root and add:

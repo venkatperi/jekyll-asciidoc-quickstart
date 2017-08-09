@@ -70,6 +70,6 @@ require('./css')  //that's it
 
 == Learn More
 
-  - link:features[Webpkr features]
-  - link:getting-started[Getting started]
+  - link:installation[Installation]
+  - link:api[Webpkr API]
   - link:dsl-reference[Webpkr build language reference]

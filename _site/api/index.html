@@ -1,0 +1,302 @@
+<!doctype html>
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en"> <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webpkr API</title>
+  <meta name="description"
+        content="webpkr - The webpack DSL">
+  <script src="http://localhost:8080/main.js"></script>
+  <link rel="stylesheet" href="http://localhost:8080/style.css">
+</head>
+<body>
+
+<!-- Nav Bar -->
+<nav class="top-bar" data-topbar>
+  <span class="name">
+      <a href="/"><img src="/assets/webpkr-white.svg"></a>
+  </span>
+  <span class="right">
+    <a href="https://github.com/venkatperi/webpkr"><i class="icon fa fa-github" aria-hidden="true"></i></a>
+  </span>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="container">
+  <div class="row">
+    <aside class="sidebar main-toc small-2 columns">
+      
+      
+      <h4><a href="/">Home</a></h4>
+      <ul class="nav">
+        
+        <li><a href="/installation">Installation</a></li>
+        
+        <li><a href="/dsl-reference">DSL Reference</a></li>
+        
+        <li><a href="/api">API</a></li>
+        
+        <li><a href="/examples">Examples</a></li>
+        
+      </ul>
+      
+      
+      <div id="toc"></div>
+    </aside>
+
+    <div class="small-9 columns" role="content">
+      <h1>Webpkr API</h1>
+<div class="sect1">
+<h2 id="require">require</h2>
+<div class="sectionbody">
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">webpkr = require('webpkr');</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="webpkr_opts">webpkr(opts)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Creates a new instance of <code>Webpkr</code> with the supplied options and calls <code>buildFile()</code> on it and returns the resulting <code>webpack</code> configuration.</p>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 50%;">
+<col style="width: 25%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">option</th>
+<th class="tableblock halign-left valign-top">type</th>
+<th class="tableblock halign-left valign-top">description</th>
+<th class="tableblock halign-left valign-top">default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>opts.config</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>{String}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>The webpkr configuration module</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>./webpkr</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>opts.projectDir</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>{String}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>The project directory.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>process.cwd()</code></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>opts.buildDir</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>{String}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>The build directory where output is written.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>projectDir/build</code>.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>opts.environments</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>{String[]}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>The <code>node.js</code> environments.</p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p><code>['development', 'production', 'testing', 'staging']</code>.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="webpkr_webpkr">webpkr.Webpkr</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="webpkr_opts_2">Webpkr(opts)</h3>
+<div class="paragraph">
+<p>See <code>webpkr()</code> above for option details.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="members">Members</h3>
+<div class="sect3">
+<h4 id="compile_closure">compile(closure)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>closure</code> <code>{Function}</code> Contains the build script.</p>
+</li>
+<li>
+<p>Returns <code>{Object}</code> the configuration tree.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Compiles the supplied DSL build script into a configuration tree.</p>
+</div>
+<div class="listingblock">
+<div class="title">Example</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const { Webpkr } = require( '../' );
+const webpkr = new Webpkr();
+
+const tree = webpkr.compile( () =&gt; {
+  context( projectDir )
+  entry( './src/index.js' )
+  output( () =&gt; {
+    filename( 'bundle.js' )
+    path$( 'dist' )
+  } )
+} )
+
+// print configuration tree
+console.log( tree.toAsciiTree() );</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Output</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">└─webpackConfig, WebpackNodeExt, webpackConfig, [ undefined ]
+  ├─context, ContextNodeExt, context, [ '/Users/venkat/proj/repos...'
+  ├─entry, EntryNodeExt, entry, [ './src/index.js' ]
+  └─output, OutputNodeExt, output, [ undefined ]
+    ├─filename, FilenameNodeExt, node.__filename, [ 'bundle.js' ]
+    └─path$, PathNodeExt, output.path, [ 'dist' ]</code></pre>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="compilefile_file">compileFile(file)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>file</code> <code>{String}</code> path to file containing DSL build script</p>
+</li>
+<li>
+<p>Returns <code>{Object}</code> the configuration tree.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Loads the DSL build script from the supplied file and returns the compiled configuration tree. Relative paths are resolved from <code>projectDir</code>.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="buildfile_file">buildFile(file)</h4>
+<div class="ulist">
+<ul>
+<li>
+<p><code>file</code> <code>{String}</code> path to file containing DSL build script</p>
+</li>
+<li>
+<p>Returns <code>{Function}</code> <code>webpack</code> configuration.</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Loads the DSL build script from the supplied file, builds it and returns a <code>Function</code> which can be passed to <code>webpack</code>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The returned <code>Function</code> accepts a single parameter. The <code>webpack</code> CLI uses this parameter to pass commandline arguments set via <code>--env</code> to the configuration script. These arguments are avilable via a global object <code>cliArgs</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock tip">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-tip" title="Tip"></i>
+</td>
+<td class="content">
+When using the <code>webpack</code> Node API, the function must be called and the resulting object should be passed to <code>webpack()</code>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="events">Events</h3>
+<div class="sect3">
+<h4 id="aftercompile">afterCompile</h4>
+<div class="paragraph">
+<p>Emitted after the DSL is compiled into a configuration tree. The tree is passed as the only argument to the event.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="afternodeevaluate">afterNodeEvaluate</h4>
+<div class="paragraph">
+<p>Emitted during the evaluation phase, after each node is evaluated. The current node and its evaluated value are passed as arguments.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="afterevaluate">afterEvaluate</h4>
+<div class="paragraph">
+<p>Emitted after the entire configuration tree is evaluated. The final <code>webpack</code> configuration object is passed as the only argument.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+  </div>
+</div>
+
+<!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+
+<footer class="row">
+  <div class="medium-12 columns">
+    <hr>
+    <div class="row">
+      <div class="medium-12 columns">
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

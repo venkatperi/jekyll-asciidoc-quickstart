@@ -1,8 +1,9 @@
 = Example: Explicit Vendor Bundle
-:showtitle:
 :page-permalink: /examples/vendor-bundle/
 
-File `webpack/index.js`. Use with `webpack.config.js` as described above.
+== Example: Explicit Vendor Bundle
+
+Creates a separate vendor bundle.
 
 ```javascript
 const path = require( 'path' )
@@ -28,15 +29,17 @@ resolve( () => {
   alias( { jquery: 'jquery/src/jquery' } )
 } )
 
-plugin( webpack.ProvidePlugin, {
+plugin( new webpack.ProvidePlugin( {
   $: 'jquery',
   jQuery: 'jquery'
-} )
+} ) )
 
 // pull out vendor items into a separate bundle
-plugin( webpack.optimize.CommonsChunkPlugin, {
+plugin( new webpack.optimize.CommonsChunkPlugin( {
   name: 'vendor',
   minChunks: Infinity
-} )
+} ) )
 
 ```
+
+include::configure-webpack.adoc[]

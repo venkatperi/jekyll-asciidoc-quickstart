@@ -1,11 +1,11 @@
 = Example: Multiple Environments
-:showtitle:
 :page-permalink: /examples/multi-env/
+
+== Example: Multiple Environments
 
 Instead of duplicating configuration for multiple environments (e.g. development/production), `webpkr`
 lets you specify configuration items for specific environments in the same configuration.
 
-File `webpack/index.js`. Use with `webpack.config.js` as described above.
 
 ```javascript
 const Stats = require( 'stats-webpack-plugin' );
@@ -45,3 +45,5 @@ production( () => {
 } )
 
 ```
+
+include::configure-webpack.adoc[]

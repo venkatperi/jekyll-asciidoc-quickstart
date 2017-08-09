@@ -8,10 +8,8 @@
   <title>Example: Multiple Environments</title>
   <meta name="description"
         content="webpkr - The webpack DSL">
-  <!--<script src="http://localhost:8080/vendor.js"></script>-->
-  <script src="/build/main.js"></script>
-  <!--<script src="http://localhost:8080/modernizr.js"></script>-->
-  <link rel="stylesheet" href="/build/style.css">
+  <script src="http://localhost:8080/main.js"></script>
+  <link rel="stylesheet" href="http://localhost:8080/style.css">
 </head>
 <body>
 
@@ -28,33 +26,35 @@
 
 
 <!-- Main Page Content and Sidebar -->
-<div class="row">
-  <aside class="main-toc medium-2 columns">
-    
-    
-    <h4><a href="http://localhost:8080//">Home</a></h4>
-    <ul class="nav">
+<div class="container">
+  <div class="row">
+    <aside class="sidebar main-toc small-2 columns">
       
-      <li><a href="http://localhost:8080//installation">Installation</a></li>
       
-      <li><a href="http://localhost:8080//features">Webpkr Features</a></li>
+      <h4><a href="/">Home</a></h4>
+      <ul class="nav">
+        
+        <li><a href="/installation">Installation</a></li>
+        
+        <li><a href="/dsl-reference">DSL Reference</a></li>
+        
+        <li><a href="/api">API</a></li>
+        
+        <li><a href="/examples">Examples</a></li>
+        
+      </ul>
       
-      <li><a href="http://localhost:8080//dsl-reference">DSL Reference</a></li>
       
-    </ul>
-    
-    
-    <div id="toc"></div>
-  </aside>
+      <div id="toc"></div>
+    </aside>
 
-  <div class="medium-10 columns" role="content">
-    <h1>Example: Multiple Environments</h1>
+    <div class="small-9 columns" role="content">
+      <div class="sect1">
+<h2 id="example_multiple_environments">Example: Multiple Environments</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>Instead of duplicating configuration for multiple environments (e.g. development/production), <code>webpkr</code>
 lets you specify configuration items for specific environments in the same configuration.</p>
-</div>
-<div class="paragraph">
-<p>File <code>webpack/index.js</code>. Use with <code>webpack.config.js</code> as described above.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -95,6 +95,21 @@ production( () =&gt; {
 } )</code></pre>
 </div>
 </div>
+<div class="sect2">
+<h3 id="configure_webpack">Configure Webpack</h3>
+<div class="paragraph">
+<p>Create a <code>webpack.config.js</code> in your project&#8217;s root and add:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const webpkr = require('webpkr');
+module.exports = webpkr({projectDir: __dirname});</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
   </div>
 </div>
 

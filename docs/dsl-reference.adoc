@@ -4,6 +4,9 @@
 
 Webpkr scripts are _configuration scripts_. As the script executes, it configures a tree of configuration nodes. During the evaluation phase, tree nodes are evaluated to generate a `webpack` configuration object.
 
+[WARNING]
+Under Development.
+
 == Script Structure
 A configuration script is made of up of multiple statements and script blocks. A script block inserts a new node in the the _configuration tree_ and takes optional parameters. If the final parameter is a closure, it is treated as a _configuration closure_ which configures the newly created node. Any optional parameters are available to the node during the subsequent evaluation phase.
 

@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700|Titillium+Web:300,400,600,700');
+
+$text-color: #333;
+$font-size: 1.05rem;
+$lead-font-size: 1.2rem;
+$code-font-size: 1rem;
+$page-width: 960px;
+
+body, p, h1, h2, h3, h4, h5, h6, ul, li {
+  color: $text-color;
+  font-family: "Titillium Web", sans-serif;
+}
+
+table tr {
+  td, th {
+    font-size: $font-size;
+  }
+}
+
+*:not(pre) > code {
+  font-family: Inconsolata, monospace;
+  font-size: $code-font-size;
+  background-color: #f5f5f5;
+  color: #101010;
+  border: none;
+}
+
+pre > code {
+  line-height: 1.4em;
+}
+
+#preamble {
+  font-size: $lead-font-size;
+}
+
+p {
+  font-size: $font-size;
+}
+
+.lead {
+  font-size: $lead-font-size;
+  border-bottom: 1px dashed #ccc;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  font-weight: 300;
+}
+
+h3 {
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.sect2 + .sect2 , .sect3 + .sect3 {
+  border-top: 2px dashed #ccc;
+  margin-top: 60px;
+  padding-top: 30px;
+}
+
+h3 code {
+  border: none;
+}
+
+h4, h5 {
+  font-weight: 700;
+  font-size: $font-size;
+}
+
+code {
+  &.hljs {
+    font-size: 0.9rem;
+  }
+  border: none;
+}
+
+.container {
+  max-width: $page-width;
+}
+
+.listingblock pre {
+  border: none;
+  &[class] {
+    border: none;
+  }
+}
+
+.sidebar {
+  padding-top: 1em;
+  margin-left: 50px;
+  padding-left: 0;
+  a {
+    color: #0f2634;
+  }
+  h4 {
+    border: none;
+    margin-bottom: 0;
+  }
+  ul {
+    padding: 0;
+    margin-left: 0;
+    margin-bottom: 25px;
+  }
+  li {
+    list-style: none;
+    padding: 3px 0;
+    a {
+      color: #0f2634;
+    }
+  }
+}
+
+ul {
+  padding-left: 0.6rem;
+}
+
+li {
+  list-style: disc outside;
+}
+
+.top-bar {
+  background: #102633;
+  height: 50px;
+  padding: 0 50px;
+  .icon {
+    color: white;
+    font-size: 2em;
+    padding-top: 10px;
+  }
+  h1 {
+    border: none;
+  }
+}
+
+
+
+@media only screen and (max-width: 40em) {
+  .sidebar {
+    margin-left: 15px;
+  }
+  .top-bar{
+    padding: 0 15px;
+  }
+}

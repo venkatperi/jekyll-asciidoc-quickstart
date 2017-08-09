@@ -4,8 +4,11 @@
     - title: "Installation"
       href: "/installation"
 
-    - title: "Webpkr Features"
-      href: "/features"
-
     - title: "DSL Reference"
       href: "/dsl-reference"
+
+    - title: "API"
+      href: "/api"
+
+    - title: "Examples"
+      href: "/examples"

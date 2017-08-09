@@ -1,0 +1,8 @@
+
+=== Configure Webpack
+Create a `webpack.config.js` in your project's root and add:
+
+```javascript
+const webpkr = require('webpkr');
+module.exports = webpkr({projectDir: __dirname});
+```

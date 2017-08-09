@@ -74,6 +74,7 @@ gulp.task( 'bs:serve', function () {
     proxy: "http://localhost:4000"
   } );
   gulp.watch( "_site/**/*", ['bs:reload'] );
+  gulp.watch( "build/**/*", ['bs:reload'] );
 } );
 
 gulp.task( 'build', ['webpack:compile'] )
