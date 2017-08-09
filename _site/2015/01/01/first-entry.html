@@ -8,23 +8,18 @@
     <title>First Entry</title>
     <meta name="description"
           content="webpkr - The webpack DSL">
-    <script src="../../../build/vendor.js"></script>
-    <script src="../../../build/main.js"></script>
-    <script src="../../../build/modernizr.js"></script>
-    <link rel="stylesheet" href="../../../build/style.css">
+    <!--<script src="http://localhost:8080/vendor.js"></script>-->
+    <script src="http://localhost:8080/main.js"></script>
+    <!--<script src="http://localhost:8080/modernizr.js"></script>-->
+    <link rel="stylesheet" href="http://localhost:8080/style.css">
 </head>
 <body>
 
-
 <!-- Nav Bar -->
-
 <nav class="top-bar" data-topbar>
     <ul class="title-area">
-        <!-- Title Area -->
         <li class="name">
-            <h1>
-                <a href="../../../">webpkr documentation</a>
-            </h1>
+            <h1><a href="/">webpkr</a></h1>
         </li>
         <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
     </ul>
@@ -33,11 +28,23 @@
 
 
 <!-- Main Page Content and Sidebar -->
-
 <div class="row">
-
-    <!-- Main Blog Content -->
-    <div class="large-9 columns" role="content">
+    <aside class="main-toc medium-3 columns">
+        <h3><a href="/">Home</a></h3>
+        <ul class="nav">
+            <li><a href="/features">Webpkr Features</a></li>
+            <li><a href="/getting-started">Getting Started</a></li>
+            <li><a href="/dsl-reference">DSL Reference</a></li>
+        </ul>
+        <h4>Examples</h4>
+        <ul class="nav">
+            <li><a href="/examples/vendor-bundle">Explicit Vendor Bundle</a></li>
+            <li><a href="/examples/multi-env">Multiple Environments</a></li>
+            <li><a href="/examples/partition">Partitioning Build Logic</a></li>
+        </ul>
+        <div id="toc"></div>
+    </aside>
+    <div class="medium-9 columns" role="content">
         <h1>First Entry</h1>
 <div class="sect1">
 <h2 id="example_entry">Example entry</h2>
@@ -60,21 +67,6 @@
 </div>
 </div>
     </div>
-
-    <!-- End Main Content -->
-
-    <!-- Sidebar -->
-
-    <aside class="large-3 columns">
-        <h4>Posts</h4>
-        <ul id="posts" class="posts nav">
-            
-            <li><a href="./2015/01/01/first-entry.html">First Entry</a></li>
-            
-        </ul>
-    </aside>
-
-    <!-- End Sidebar -->
 </div>
 
 <!-- End Main Content and Sidebar -->
@@ -83,11 +75,10 @@
 <!-- Footer -->
 
 <footer class="row">
-    <div class="large-12 columns">
+    <div class="medium-12 columns">
         <hr>
         <div class="row">
-            <div class="large-12 columns">
-                <p>Footer</p>
+            <div class="medium-12 columns">
             </div>
         </div>
     </div>

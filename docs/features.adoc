@@ -1,0 +1,14 @@
+= Webpkr Features
+:showtitle:
+:page-permalink: /features/
+
+Webpkr provides:
+
+.Declarative builds
+The core of Webpack is a _domain specific language_ (DSL) which lets you write JavaScript build scripts, rather than monolithic JavaScript objects. Webpkr provides declarative language elements which you can assemble as you like. Simply `require` reusable code to include it in your build.
+
+.Structure your build
+Webpkr makes it very easy to structure your build from reusable pieces of build logic, letting you partition code logically.
+
+.Multi-environment builds
+Webpak lets you target multiple environments (e.g. development, production) in the same build script so that you have a single truth of build logic. You no longer need to clone your base build for development and production.

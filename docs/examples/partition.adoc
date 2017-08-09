@@ -1,0 +1,50 @@
+= Example: Splitting Configuration into Multiple Files
+:showtitle:
+:page-permalink: /examples/partition/
+
+`webpkr` configurations can be split into multiple files. Simply `require` the parts like any other nodejs module. e.g.:
+
+File `webpack/index.js`.
+```javascript
+[
+  'base',
+  'js',
+  'fonts',
+  'stats',
+  'devtool',
+  'dev_server'
+].map( ( x ) => `./${x}` )
+  .forEach( require )
+```
+
+`base.js`
+```javascript
+context( projectDir )
+
+entry( './src/index.js' )
+
+output( () => {
+  filename( 'bundle.js' )
+  path$( 'dist' )
+} )
+
+stats( 'errors-only' )
+
+cache( true )
+
+resolve( { extensions: ['*', '.js', '.jsx'] } )
+```
+
+`js.js`
+```javascript
+const path = require( 'path' )
+
+module$( () => {
+  rule( () => {
+    test( /\.js$/ )
+    use( 'babel-loader' )
+    include( path.resolve( srcDirs.js ) )
+    exclude( /node_modules/ )
+  } )
+} )
+```

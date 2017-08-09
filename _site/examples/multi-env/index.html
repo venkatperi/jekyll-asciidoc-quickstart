@@ -1,0 +1,114 @@
+<!doctype html>
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en"> <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Example: Multiple Environments</title>
+    <meta name="description"
+          content="webpkr - The webpack DSL">
+    <!--<script src="http://localhost:8080/vendor.js"></script>-->
+    <script src="http://localhost:8080/main.js"></script>
+    <!--<script src="http://localhost:8080/modernizr.js"></script>-->
+    <link rel="stylesheet" href="http://localhost:8080/style.css">
+</head>
+<body>
+
+<!-- Nav Bar -->
+<nav class="top-bar" data-topbar>
+    <ul class="title-area">
+        <li class="name">
+            <h1><a href="/">webpkr</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+    <aside class="main-toc medium-3 columns">
+        <h3><a href="/">Home</a></h3>
+        <ul class="nav">
+            <li><a href="/features">Webpkr Features</a></li>
+            <li><a href="/getting-started">Getting Started</a></li>
+            <li><a href="/dsl-reference">DSL Reference</a></li>
+        </ul>
+        <h4>Examples</h4>
+        <ul class="nav">
+            <li><a href="/examples/vendor-bundle">Explicit Vendor Bundle</a></li>
+            <li><a href="/examples/multi-env">Multiple Environments</a></li>
+            <li><a href="/examples/partition">Partitioning Build Logic</a></li>
+        </ul>
+        <div id="toc"></div>
+    </aside>
+    <div class="medium-9 columns" role="content">
+        <h1>Example: Multiple Environments</h1>
+<div class="paragraph">
+<p>Instead of duplicating configuration for multiple environments (e.g. development/production), <code>webpkr</code>
+lets you specify configuration items for specific environments in the same configuration.</p>
+</div>
+<div class="paragraph">
+<p>File <code>webpack/index.js</code>. Use with <code>webpack.config.js</code> as described above.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const Stats = require( 'stats-webpack-plugin' );
+
+context( projectDir )
+
+entry( './src/index.js' )
+
+output( () =&gt; {
+  filename( 'bundle.js' )
+  path$( 'dist' )
+} )
+
+// Included only when NODE_ENV=development
+development( () =&gt; {
+  devtool( 'cheap-module-source-map' )
+  plugin( new Stats( 'stats.json', {
+    chunkModules: true
+  } ) )
+} )
+
+// Included only when NODE_ENV=production
+production( () =&gt; {
+  plugin( new webpack.optimize.UglifyJsPlugin( {
+    mangle: true,
+    compress: {
+      screw_ie8: true,
+      warnings: false,
+    },
+  } ) )
+
+  plugin( new webpack.optimize.AggressiveMergingPlugin() )
+
+  plugin( new webpack.optimize.MinChunkSizePlugin( {
+    minChunkSize: 2048,
+  } ) )
+} )</code></pre>
+</div>
+</div>
+    </div>
+</div>
+
+<!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+
+<footer class="row">
+    <div class="medium-12 columns">
+        <hr>
+        <div class="row">
+            <div class="medium-12 columns">
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

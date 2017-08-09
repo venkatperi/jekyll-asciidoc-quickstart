@@ -7,11 +7,14 @@ output( () => {
   filename( '[name].js' )
 } )
 
+development(() => {
+  devtool( 'cheap-module-source-map' )
+})
+
 require( './vendor' )
 require( './js' )
 require( './css' )
-require( './scss' )
 require( './images' )
 require( './fonts' )
 require( './node' )
-require( './modernizr' )
+// require( './modernizr' )

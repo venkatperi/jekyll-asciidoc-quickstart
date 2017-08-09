@@ -1,0 +1,42 @@
+= Example: Explicit Vendor Bundle
+:showtitle:
+:page-permalink: /examples/vendor-bundle/
+
+File `webpack/index.js`. Use with `webpack.config.js` as described above.
+
+```javascript
+const path = require( 'path' )
+const webpack = require('webpack')
+
+// the project root
+context( projectDir )
+
+// We have two entry points
+entry( {
+  main: './src/index.js',,
+  vendor: ['jquery', 'lodash', 'jsdom']
+} )
+
+// spit out main-bundle.js and vendor-bundle.js
+output( () => {
+  filename( '[name]-bundle.js' )
+  path$( 'dist' )
+} )
+
+// tell webpack how to find jquery
+resolve( () => {
+  alias( { jquery: 'jquery/src/jquery' } )
+} )
+
+plugin( webpack.ProvidePlugin, {
+  $: 'jquery',
+  jQuery: 'jquery'
+} )
+
+// pull out vendor items into a separate bundle
+plugin( webpack.optimize.CommonsChunkPlugin, {
+  name: 'vendor',
+  minChunks: Infinity
+} )
+
+```

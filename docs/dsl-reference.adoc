@@ -1,0 +1,171 @@
+= webpkr Build Language Reference
+:showtitle:
+:page-permalink: /dsl-reference/
+
+Webpkr scripts are _configuration scripts_. As the script executes, it configures a tree of configuration nodes. During the evaluation phase, tree nodes are evaluated to generate a `webpack` configuration object.
+
+== Script Structure
+A configuration script is made of up of multiple statements and script blocks. A script block inserts a new node in the the _configuration tree_ and takes optional parameters. If the final parameter is a closure, it is treated as a _configuration closure_ which configures the newly created node. Any optional parameters are available to the node during the subsequent evaluation phase.
+
+Top level script blocks map to top level keys of the `webpack` configuration object. Where there is a potential clash of names (e.g. with `module` or `path`), the script block name is appended with a `$` symbol.
+
+The build script is JavaScript code, and can contain any valid JavaScript, such as method definitions, `require` statements, classes etc.
+
+== Builder/Global Variables
+
+=== `projectDir`
+The directory containing the project build file. Defaults to `process.cwd()`.
+```javascript
+// webpack.config.js
+module.exports = require( 'webpkr' )( { projectDir: __dirname } );
+
+```
+=== `buildDir`
+The build directory of this project where all the output will be generated. Defaults to `projectDir/build`.
+
+== Entry and Context
+
+=== `context( )`
+`string`
+
+The base directory for resolving entry points and loaders from configuration. Relative paths are resolved from `projectDir`.
+
+```javascript
+// context = projectDir/src
+context('src')
+```
+
+
+=== `entry()`
+`string | [string] | object { <key>: string | [string] }`
+
+The point or points to enter the application. See link:https://webpack.js.org/configuration/entry-context/#entry[entry]. Webpkr will merge multiple calls to `entry()`:
+
+- Arrays will be merged with arrays or individual strings.
+- Objects will merged/extended by key.
+
+[WARNING]
+Attempting to merge an array with an object will result in an error.
+
+[header,cols="1a,1a", grid=cols, frame=none, options="header"]
+|===
+^| webpkr script
+^| webpack configuration
+
+|
+```javascript
+entry('./src/index.js')
+entry('./src/another.js')
+```
+
+|
+```javascript
+{
+  entry: ['./src/index.js', './src/another.js']
+}
+```
+|===
+
+
+=== `amd( string )`
+
+bail( false )
+cache( true )
+dependency( 'dep-a' )
+dependency( 'dep-b' )
+devServer( {
+  inline: true,
+  contentBase: 'src',
+  port: 3001
+} )
+devtool( 'cheap-module-source-map' )
+external( { react: 'react' } )
+
+external( {
+  lodash: {
+    commonjs: "lodash",
+    amd: "lodash",
+    root: "_" // indicates global variable
+  }
+} )
+
+external( {
+  subtract: {
+    root: ["math", "subtract"]
+  }
+} )
+
+loader( {
+  some_value: 1  //expose custom value to loader
+} )
+
+module$( () => {
+
+  rule( () => {
+    test( /\.css$/ )
+    use( ExtractTextPlugin.extract( {
+      fallback: 'style-loader',
+      use: 'css-loader',
+    } ) )
+    include( srcDirs.css )
+  } )
+
+  rule( () => {
+    test( /\.js$/ )
+    use( 'babel-loader' )
+    include( path.resolve( srcDirs.js ) )
+    exclude( /node_modules/ )
+  } )
+
+} )
+
+module$( () => {
+  rule( () => {
+    test( /\.(ttf|eot|woff|woff2)$/ )
+    use( 'url-loader' )
+  } )
+} )
+
+name( 'some name' )
+
+node( {
+  module: 'empty',
+  net: 'empty',
+  child_process: 'empty',
+  tls: 'empty',
+  fs: 'empty'
+} )
+
+output( () => {
+  filename( 'bundle.js' )
+  path$( 'dist' )
+} )
+
+performance( () => {
+  maxEntrypointSize( 400000 )
+  maxAssetSize( 100000 )
+  hints( 'warning' )
+  assetFilter( f => f.endsWith( '.js' ), () => {
+  } )
+} )
+
+plugin(
+  new ExtractTextPlugin( {
+    filename: "style.css",
+    allChunks: true
+  } )
+)
+
+profile( true )
+
+recordsInputPath( path.join( __dirname, 'records.json' ) )
+recordsOutputPath( path.join( __dirname, 'newRecords.json' ) )
+recordsPath( path.join( __dirname, 'records.json' ) )
+
+resolve( () => {
+  alias( {
+    Utilities: path.resolve( __dirname, 'src/utilities/' ),
+    Templates: path.resolve( __dirname, 'src/templates/' )
+  } )
+  extensions( ['*', '.js', '.jsx'] )
+} )

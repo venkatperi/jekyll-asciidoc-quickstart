@@ -1,0 +1,47 @@
+= Example: Multiple Environments
+:showtitle:
+:page-permalink: /examples/multi-env/
+
+Instead of duplicating configuration for multiple environments (e.g. development/production), `webpkr`
+lets you specify configuration items for specific environments in the same configuration.
+
+File `webpack/index.js`. Use with `webpack.config.js` as described above.
+
+```javascript
+const Stats = require( 'stats-webpack-plugin' );
+
+context( projectDir )
+
+entry( './src/index.js' )
+
+output( () => {
+  filename( 'bundle.js' )
+  path$( 'dist' )
+} )
+
+// Included only when NODE_ENV=development
+development( () => {
+  devtool( 'cheap-module-source-map' )
+  plugin( new Stats( 'stats.json', {
+    chunkModules: true
+  } ) )
+} )
+
+// Included only when NODE_ENV=production
+production( () => {
+  plugin( new webpack.optimize.UglifyJsPlugin( {
+    mangle: true,
+    compress: {
+      screw_ie8: true,
+      warnings: false,
+    },
+  } ) )
+
+  plugin( new webpack.optimize.AggressiveMergingPlugin() )
+
+  plugin( new webpack.optimize.MinChunkSizePlugin( {
+    minChunkSize: 2048,
+  } ) )
+} )
+
+```

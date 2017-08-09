@@ -1,0 +1,63 @@
+= Getting Started
+:showtitle:
+:page-permalink: /getting-started/
+
+== Installation
+
+Install with `npm`:
+
+```bash
+$ npm install -D webpkr
+```
+
+== Sample Project
+
+Create `src/index.js` and add:
+
+```javascript
+console.log('Hello, world');
+```
+
+By default, `webpkr` looks for config scripts in the `webpack/` subdirectory. Create a `webpack` subdirectory in your project's root and add file `index.js` in it:
+```bash
+$ mkdir webpack
+$ touch webpack/index.js
+```
+
+Add the following DSL script to `webpack/index.js`:
+
+```javascript
+context( projectDir )
+entry( './src/index.js')
+output( () => {
+  filename( 'bundle.js' )
+  path$( 'dist' )
+} )
+```
+Create a `webpack.config.js` in your project's root and add:
+
+```javascript
+const webpkr = require('webpkr');
+module.exports = webpkr({projectDir: __dirname});
+```
+
+Run webpack:
+
+```bash
+$ ./node_modules/.bin/webpack
+```
+
+The DSL script generates the following webpack configuration:
+
+```JavaScript
+{
+  context: '/proj/repos/webpkr/test/simple',
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: '/proj/repos/webpkr/test/simple/dist'
+  }
+}
+```
+
+The bundled output is available in `dist/bundle.js`.

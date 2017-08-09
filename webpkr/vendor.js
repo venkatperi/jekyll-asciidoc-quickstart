@@ -1,19 +1,23 @@
 const webpack = require( 'webpack' )
 
-entry( { vendor: ['jquery', 'foundation', 'highlightjs'] } )
+// entry( { vendor: ['jquery', 'foundation', 'highlight'] } )
 
 resolve( () => {
   alias( { jquery: 'jquery/src/jquery' } )
-  alias( { foundation: 'foundation-sites/js/entries/foundation' } )
+  alias( { foundation: './js/foundation/foundation' } )
+  // alias( { foundation: 'foundation-sites/js/foundation.core' } )
+  // alias( { highlight: 'highlight.js/lib/highlight' } )
 } )
 
-plugin( webpack.ProvidePlugin, {
+plugin( new webpack.ProvidePlugin( {
   $: 'jquery',
-  jQuery: 'jquery'
-} )
+  jQuery: 'jquery',
+  // highlight: 'highlight',
+  // foundation: 'foundation',
+} ) )
 
-plugin( webpack.optimize.CommonsChunkPlugin, {
-  name: 'vendor',
-  minChunks: Infinity
-} )
+// plugin( new webpack.optimize.CommonsChunkPlugin( {
+//   name: 'vendor',
+//   minChunks: Infinity
+// } ) )
 

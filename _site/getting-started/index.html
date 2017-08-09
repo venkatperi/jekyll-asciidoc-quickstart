@@ -1,0 +1,151 @@
+<!doctype html>
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en"> <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started</title>
+    <meta name="description"
+          content="webpkr - The webpack DSL">
+    <!--<script src="http://localhost:8080/vendor.js"></script>-->
+    <script src="http://localhost:8080/main.js"></script>
+    <!--<script src="http://localhost:8080/modernizr.js"></script>-->
+    <link rel="stylesheet" href="http://localhost:8080/style.css">
+</head>
+<body>
+
+<!-- Nav Bar -->
+<nav class="top-bar" data-topbar>
+    <ul class="title-area">
+        <li class="name">
+            <h1><a href="/">webpkr</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+    <aside class="main-toc medium-3 columns">
+        <h3><a href="/">Home</a></h3>
+        <ul class="nav">
+            <li><a href="/features">Webpkr Features</a></li>
+            <li><a href="/getting-started">Getting Started</a></li>
+            <li><a href="/dsl-reference">DSL Reference</a></li>
+        </ul>
+        <h4>Examples</h4>
+        <ul class="nav">
+            <li><a href="/examples/vendor-bundle">Explicit Vendor Bundle</a></li>
+            <li><a href="/examples/multi-env">Multiple Environments</a></li>
+            <li><a href="/examples/partition">Partitioning Build Logic</a></li>
+        </ul>
+        <div id="toc"></div>
+    </aside>
+    <div class="medium-9 columns" role="content">
+        <h1>Getting Started</h1>
+<div class="sect1">
+<h2 id="installation">Installation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Install with <code>npm</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ npm install -D webpkr</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="sample_project">Sample Project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create <code>src/index.js</code> and add:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">console.log('Hello, world');</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>By default, <code>webpkr</code> looks for config scripts in the <code>webpack/</code> subdirectory. Create a <code>webpack</code> subdirectory in your project&#8217;s root and add file <code>index.js</code> in it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ mkdir webpack
+$ touch webpack/index.js</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Add the following DSL script to <code>webpack/index.js</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">context( projectDir )
+entry( './src/index.js')
+output( () =&gt; {
+  filename( 'bundle.js' )
+  path$( 'dist' )
+} )</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Create a <code>webpack.config.js</code> in your project&#8217;s root and add:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const webpkr = require('webpkr');
+module.exports = webpkr({projectDir: __dirname});</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Run webpack:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ ./node_modules/.bin/webpack</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The DSL script generates the following webpack configuration:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-JavaScript hljs" data-lang="JavaScript">{
+  context: '/proj/repos/webpkr/test/simple',
+  entry: './src/index.js',
+  output: {
+    filename: 'bundle.js',
+    path: '/proj/repos/webpkr/test/simple/dist'
+  }
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The bundled output is available in <code>dist/bundle.js</code>.</p>
+</div>
+</div>
+</div>
+    </div>
+</div>
+
+<!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+
+<footer class="row">
+    <div class="medium-12 columns">
+        <hr>
+        <div class="row">
+            <div class="medium-12 columns">
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

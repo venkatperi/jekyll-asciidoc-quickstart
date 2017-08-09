@@ -1,0 +1,317 @@
+<!doctype html>
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en"> <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>webpkr Build Language Reference</title>
+    <meta name="description"
+          content="webpkr - The webpack DSL">
+    <!--<script src="http://localhost:8080/vendor.js"></script>-->
+    <script src="http://localhost:8080/main.js"></script>
+    <!--<script src="http://localhost:8080/modernizr.js"></script>-->
+    <link rel="stylesheet" href="http://localhost:8080/style.css">
+</head>
+<body>
+
+<!-- Nav Bar -->
+<nav class="top-bar" data-topbar>
+    <ul class="title-area">
+        <li class="name">
+            <h1><a href="/">webpkr</a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+    </ul>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+    <aside class="main-toc medium-3 columns">
+        <h3><a href="/">Home</a></h3>
+        <ul class="nav">
+            <li><a href="/features">Webpkr Features</a></li>
+            <li><a href="/getting-started">Getting Started</a></li>
+            <li><a href="/dsl-reference">DSL Reference</a></li>
+        </ul>
+        <h4>Examples</h4>
+        <ul class="nav">
+            <li><a href="/examples/vendor-bundle">Explicit Vendor Bundle</a></li>
+            <li><a href="/examples/multi-env">Multiple Environments</a></li>
+            <li><a href="/examples/partition">Partitioning Build Logic</a></li>
+        </ul>
+        <div id="toc"></div>
+    </aside>
+    <div class="medium-9 columns" role="content">
+        <h1>webpkr Build Language Reference</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Webpkr scripts are <em>configuration scripts</em>. As the script executes, it configures a tree of configuration nodes. During the evaluation phase, tree nodes are evaluated to generate a <code>webpack</code> configuration object.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="script_structure">Script Structure</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A configuration script is made of up of multiple statements and script blocks. A script block inserts a new node in the the <em>configuration tree</em> and takes optional parameters. If the final parameter is a closure, it is treated as a <em>configuration closure</em> which configures the newly created node. Any optional parameters are available to the node during the subsequent evaluation phase.</p>
+</div>
+<div class="paragraph">
+<p>Top level script blocks map to top level keys of the <code>webpack</code> configuration object. Where there is a potential clash of names (e.g. with <code>module</code> or <code>path</code>), the script block name is appended with a <code>$</code> symbol.</p>
+</div>
+<div class="paragraph">
+<p>The build script is JavaScript code, and can contain any valid JavaScript, such as method definitions, <code>require</code> statements, classes etc.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="builder_global_variables">Builder/Global Variables</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="code_projectdir_code"><code>projectDir</code></h3>
+<div class="paragraph">
+<p>The directory containing the project build file. Defaults to <code>process.cwd()</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">// webpack.config.js
+module.exports = require( 'webpkr' )( { projectDir: __dirname } );</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code_builddir_code"><code>buildDir</code></h3>
+<div class="paragraph">
+<p>The build directory of this project where all the output will be generated. Defaults to <code>projectDir/build</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="entry_and_context">Entry and Context</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="code_context_code"><code>context( )</code></h3>
+<div class="paragraph">
+<p><code>string</code></p>
+</div>
+<div class="paragraph">
+<p>The base directory for resolving entry points and loaders from configuration. Relative paths are resolved from <code>projectDir</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">// context = projectDir/src
+context('src')</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code_entry_code"><code>entry()</code></h3>
+<div class="paragraph">
+<p><code>string | [string] | object { &lt;key&gt;: string | [string] }</code></p>
+</div>
+<div class="paragraph">
+<p>The point or points to enter the application. See <a href="https://webpack.js.org/configuration/entry-context/#entry">entry</a>. Webpkr will merge multiple calls to <code>entry()</code>:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Arrays will be merged with arrays or individual strings.</p>
+</li>
+<li>
+<p>Objects will merged/extended by key.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock warning">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-warning" title="Warning"></i>
+</td>
+<td class="content">
+Attempting to merge an array with an object will result in an error.
+</td>
+</tr>
+</table>
+</div>
+<table class="tableblock frame-none grid-cols spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-center valign-top">webpkr script</th>
+<th class="tableblock halign-center valign-top">webpack configuration</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">entry('./src/index.js')
+entry('./src/another.js')</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">{
+  entry: ['./src/index.js', './src/another.js']
+}</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="code_amd_string_code"><code>amd( string )</code></h3>
+<div class="paragraph">
+<p>bail( false )
+cache( true )
+dependency( 'dep-a' )
+dependency( 'dep-b' )
+devServer( {
+  inline: true,
+  contentBase: 'src',
+  port: 3001
+} )
+devtool( 'cheap-module-source-map' )
+external( { react: 'react' } )</p>
+</div>
+<div class="paragraph">
+<p>external( {
+  lodash: {
+    commonjs: "lodash",
+    amd: "lodash",
+    root: "_" // indicates global variable
+  }
+} )</p>
+</div>
+<div class="paragraph">
+<p>external( {
+  subtract: {
+    root: ["math", "subtract"]
+  }
+} )</p>
+</div>
+<div class="paragraph">
+<p>loader( {
+  some_value: 1  //expose custom value to loader
+} )</p>
+</div>
+<div class="paragraph">
+<p>module$( () &#8658; {</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>rule( () =&gt; {
+  test( /\.css$/ )
+  use( ExtractTextPlugin.extract( {
+    fallback: 'style-loader',
+    use: 'css-loader',
+  } ) )
+  include( srcDirs.css )
+} )</pre>
+</div>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>rule( () =&gt; {
+  test( /\.js$/ )
+  use( 'babel-loader' )
+  include( path.resolve( srcDirs.js ) )
+  exclude( /node_modules/ )
+} )</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>} )</p>
+</div>
+<div class="paragraph">
+<p>module$( () &#8658; {
+  rule( () &#8658; {
+    test( /\.(ttf|eot|woff|woff2)$/ )
+    use( 'url-loader' )
+  } )
+} )</p>
+</div>
+<div class="paragraph">
+<p>name( 'some name' )</p>
+</div>
+<div class="paragraph">
+<p>node( {
+  module: 'empty',
+  net: 'empty',
+  child_process: 'empty',
+  tls: 'empty',
+  fs: 'empty'
+} )</p>
+</div>
+<div class="paragraph">
+<p>output( () &#8658; {
+  filename( 'bundle.js' )
+  path$( 'dist' )
+} )</p>
+</div>
+<div class="paragraph">
+<p>performance( () &#8658; {
+  maxEntrypointSize( 400000 )
+  maxAssetSize( 100000 )
+  hints( 'warning' )
+  assetFilter( f &#8658; f.endsWith( '.js' ), () &#8658; {
+  } )
+} )</p>
+</div>
+<div class="paragraph">
+<p>plugin(
+  new ExtractTextPlugin( {
+    filename: "style.css",
+    allChunks: true
+  } )
+)</p>
+</div>
+<div class="paragraph">
+<p>profile( true )</p>
+</div>
+<div class="paragraph">
+<p>recordsInputPath( path.join( <em>dirname, 'records.json' ) )
+recordsOutputPath( path.join( </em>dirname, 'newRecords.json' ) )
+recordsPath( path.join( __dirname, 'records.json' ) )</p>
+</div>
+<div class="paragraph">
+<p>resolve( () &#8658; {
+  alias( {
+    Utilities: path.resolve( <em>dirname, 'src/utilities/' ),
+    Templates: path.resolve( </em>dirname, 'src/templates/' )
+  } )
+  extensions( ['*', '.js', '.jsx'] )
+} )</p>
+</div>
+</div>
+</div>
+</div>
+    </div>
+</div>
+
+<!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+
+<footer class="row">
+    <div class="medium-12 columns">
+        <hr>
+        <div class="row">
+            <div class="medium-12 columns">
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

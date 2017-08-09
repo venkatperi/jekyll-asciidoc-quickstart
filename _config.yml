@@ -1,5 +1,9 @@
-title: webpkr documentation
+title: webpkr
 description: webpkr - The webpack DSL
+
+env:
+  dev:
+    baseurl: http://localhost:8080/
 
 exclude:
   - LICENSE.adoc
@@ -14,13 +18,17 @@ exclude:
   - src
   - webpkr
   - webpack.config.js
+  - gulpfile.js
+  - scss
 
 asciidoc: {}
 
 asciidoctor:
+  ext: asciidoc,adoc,ad
   base_dir: :docdir
   safe: unsafe
   attributes:
     - idseparator=_
     - source-highlighter=highlightjs
     - icons=font
+
