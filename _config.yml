@@ -1,8 +1,13 @@
 title: webpkr
 description: webpkr - The webpack DSL
 
-devurl: "http://localhost:8080"
-url: "/build"
+envs:
+  development:
+    url: "http://localhost:3000/"
+    build: "http://localhost:8080/"
+  production:
+    url: "https://venkatperi.github.io/webpkr-doc/"
+    build: "https://venkatperi.github.io/webpkr-doc/build/"
 
 exclude:
   - LICENSE.adoc

@@ -3,20 +3,22 @@
 <html class="lt-ie10" lang="en"> <![endif]-->
 <html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
 <head>
+  {% assign baseUrl = site.envs[jekyll.environment].url %}
+  {% assign buildUrl = site.envs[jekyll.environment].build %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{page.title}}</title>
   <meta name="description"
         content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-  <script src="{% if jekyll.environment == 'development' %}{{ site.devurl }}{% else %}{{ site.url }}{% endif %}/main.js"></script>
-  <link rel="stylesheet" href="{% if jekyll.environment == 'development' %}{{ site.devurl }}{% else %}{{ site.url }}{% endif %}/style.css">
+  <script src="{{ buildUrl }}/main.js"></script>
+  <link rel="stylesheet" href="{{ buildUrl }}/style.css">
 </head>
 <body>
 
 <!-- Nav Bar -->
 <nav class="top-bar" data-topbar>
   <span class="name">
-      <a href="/"><img src="/assets/webpkr-white.svg"></a>
+      <a href="{{ baseUrl }}"><img src="/assets/webpkr-white.svg"></a>
   </span>
   <span class="right">
     <a href="https://github.com/venkatperi/webpkr"><i class="icon fa fa-github" aria-hidden="true"></i></a>
@@ -31,10 +33,10 @@
     <aside class="sidebar main-toc small-2 columns">
       {% for nav in site.data.sidebar %}
       {% if nav.items != null %}
-      <h4><a href="{{ nav.href }}">{{ nav.title }}</a></h4>
+      <h4><a href="{{ baseUrl }}{{ nav.href }}">{{ nav.title }}</a></h4>
       <ul class="nav">
         {% for item in nav.items %}
-        <li><a href="{{ item.href }}">{{ item.title }}</a></li>
+        <li><a href="{{ baseUrl }}{{ item.href }}">{{ item.title }}</a></li>
         {% endfor %}
       </ul>
       {% endif %}
