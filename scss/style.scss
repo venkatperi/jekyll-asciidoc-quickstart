@@ -3,7 +3,7 @@
 $text-color: #333;
 $font-size: 1.05rem;
 $lead-font-size: 1.2rem;
-$code-font-size: 1rem;
+$code-font-size: 1.1rem;
 $page-width: 960px;
 
 body, p, h1, h2, h3, h4, h5, h6, ul, li {
@@ -39,10 +39,6 @@ p {
 
 .lead {
   font-size: $lead-font-size;
-  border-bottom: 1px dashed #ccc;
-  margin-bottom: 24px;
-  padding-bottom: 12px;
-  font-weight: 300;
 }
 
 h3 {

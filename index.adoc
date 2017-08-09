@@ -4,9 +4,9 @@
 
 == webpkr
 
-
 [cols='2a,3a', frame=none, grid=rows]
 |===
+
 2+|
 [.lead]
 Webpkr is a build system for `webpack` configurations.
