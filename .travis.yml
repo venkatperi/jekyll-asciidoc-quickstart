@@ -1,8 +1,15 @@
-language: ruby
-rvm:
-- 2.2.0
 sudo: false
-script: bundle exec rake deploy
+
+language: node_js
+
+before_install:
+  - rvm install 2.2.0
+
+install:
+  - npm install
+  - gulp webpack:build
+  - bundle exec rake deploy
+
 env:
   global:
     - JEKYLL_ENV="production"

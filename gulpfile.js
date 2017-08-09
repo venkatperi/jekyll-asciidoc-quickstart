@@ -14,6 +14,24 @@ const buildDir = {
   webpack: path.join( __dirname, 'build' ),
 }
 
+function spawnTask( name, opts = {} ) {
+  opts.tag = opts.tag || name;
+
+  return gulp.task( name, opts.deps, ( done ) => {
+    const proc = child.spawn( opts.cmd, opts.args, opts.opts );
+
+    const logger = ( buffer ) => {
+      buffer.toString()
+        .split( /\n/ )
+        .forEach( ( message ) => gutil.log( `${opts.tag}: ${message}` ) );
+    };
+
+    proc.stdout.on( 'data', logger );
+    proc.stderr.on( 'data', logger );
+    proc.on( 'close', done );
+  } );
+}
+
 gulp.task( 'jekyll:clean', ( done ) => {
   rimraf( buildDir.jekyll, done )
 } )
@@ -22,34 +40,24 @@ gulp.task( 'webpack:clean', ( done ) => {
   rimraf( buildDir.webpack, done )
 } )
 
-gulp.task( 'jekyll:serve', ['jekyll:clean'], () => {
-  const jekyll = child.spawn( 'jekyll', [
-    'serve',
-    '--watch',
-    '--incremental',
-  ] );
-
-  const jekyllLogger = ( buffer ) => {
-    buffer.toString()
-      .split( /\n/ )
-      .forEach( ( message ) => gutil.log( 'Jekyll: ' + message ) );
-  };
-
-  jekyll.stdout.on( 'data', jekyllLogger );
-  jekyll.stderr.on( 'data', jekyllLogger );
-
-} );
-
-gulp.task( 'webpack:build', ['webpack:clean'], ( done ) => {
-  Webpack( webpackConfig(), ( err, stats ) => {
-    if ( err ) return done( err );
-    gutil.log( 'Webpack: ' + stats.toString( {
-      colors: true
-    } ) )
-  } )
+spawnTask( 'webpack:build', {
+  deps: ['webpack:clean'],
+  cmd: './node_modules/.bin/webpack',
 } )
 
-gulp.task( 'webpack:serve',  () => {
+spawnTask( 'jekyll:build', {
+  deps: ['jekyll:clean', 'webpack:build'],
+  cmd: 'jekyll',
+  args: ['build'],
+} )
+
+spawnTask( 'jekyll:serve', {
+  deps: ['jekyll:clean'],
+  cmd: 'jekyll',
+  args: ['serve', '--watch', '--incremental'],
+} )
+
+gulp.task( 'webpack:serve', () => {
   const compiler = Webpack( webpackConfig() )
   const server = new WebpackDevServer( compiler, {
     stats: {
@@ -64,7 +72,7 @@ gulp.task( 'webpack:serve',  () => {
 } )
 
 gulp.task( 'bs:reload', function ( done ) {
-  console.log('reloading')
+  console.log( 'reloading' )
   browserSync.reload();
   done();
 } )
@@ -77,6 +85,6 @@ gulp.task( 'bs:serve', function () {
   gulp.watch( "build/**/*", ['bs:reload'] );
 } );
 
-gulp.task( 'build', ['webpack:compile'] )
+gulp.task( 'build', ['jekyll:build'] )
 gulp.task( 'serve', ['webpack:serve', 'jekyll:serve', 'bs:serve'] )
 
