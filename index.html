@@ -1,0 +1,205 @@
+<!doctype html>
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en"> <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>webpkr documention</title>
+  <meta name="description"
+        content="A DSL for webpack configurations">
+  <script src="http://localhost:8080/main.js"></script>
+  <link rel="stylesheet" href="http://localhost:8080/style.css">
+</head>
+<body>
+
+<!-- Nav Bar -->
+<nav class="top-bar" data-topbar>
+  <span class="name">
+      <a href="/"><img src="/assets/webpkr-white.svg"></a>
+  </span>
+  <span class="right">
+    <a href="https://github.com/venkatperi/webpkr"><i class="icon fa fa-github" aria-hidden="true"></i></a>
+  </span>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="container">
+  <div class="row">
+    <aside class="sidebar main-toc small-2 columns">
+      
+      
+      <h4><a href="/">Home</a></h4>
+      <ul class="nav">
+        
+        <li><a href="/installation">Installation</a></li>
+        
+        <li><a href="/dsl-reference">DSL Reference</a></li>
+        
+        <li><a href="/api">API</a></li>
+        
+        <li><a href="/examples">Examples</a></li>
+        
+      </ul>
+      
+      
+      <div id="toc"></div>
+    </aside>
+
+    <div class="small-9 columns" role="content">
+      <div class="sect1">
+<h2 id="webpkr">webpkr</h2>
+<div class="sectionbody">
+<table class="tableblock frame-none grid-rows spread">
+<colgroup>
+<col style="width: 40%;">
+<col style="width: 60%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top" colspan="2"><div><div class="paragraph lead">
+<p>Webpkr is a build system for <code>webpack</code> configurations.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="sect3">
+<h4 id="declarative_build_scripts">Declarative Build Scripts</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Write declarative <em>build scripts</em>.</p>
+</li>
+<li>
+<p>Stop <em>mutating</em> monolithic objects.</p>
+</li>
+<li>
+<p>Plain ol' JavaScript.</p>
+</li>
+</ul>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-middle"><div><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript"> // base.js
+context( projectDir )
+entry( './src/index.js')
+output( () =&gt; {
+  filename( 'bundle.js' )
+  path$( 'dist' ) } )</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="sect3">
+<h4 id="single_build_truth">Single Build Truth</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>All code in the same build script.</p>
+</li>
+<li>
+<p>No need to clone configurations.</p>
+</li>
+</ul>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript"> // devtool.js
+ // only for NODE_ENV=development
+development( () =&gt; {
+  devtool( 'cheap-module-source-map' ) } )</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="sect3">
+<h4 id="logical_partitioning">Logical Partitioning</h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Partition code logically for reuse.</p>
+</li>
+</ul>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript"> // css.js
+plugin( new ExtractTextPlugin( ) )
+module$( () =&gt; {
+  rule( () =&gt; {
+    test( /\.css$/ )
+    use( ExtractTextPlugin.extract( {
+      use: 'css-loader', } ) ) } ) } )</code></pre>
+</div>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="sect3">
+<h4 id="just_code_require_code">Just <code>require</code></h4>
+<div class="ulist">
+<ul>
+<li>
+<p>Order of assembly is unimportant.</p>
+</li>
+<li>
+<p>Webpkr builds correct configuration object.</p>
+</li>
+</ul>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript"> //index.js
+require('./base')
+require('./devtool')
+require('./css')  //that's it</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="learn_more">Learn More</h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="installation">Installation</a></p>
+</li>
+<li>
+<p><a href="api">Webpkr API</a></p>
+</li>
+<li>
+<p><a href="dsl-reference">Webpkr build language reference</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+    </div>
+  </div>
+</div>
+
+<!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+
+<footer class="row">
+  <div class="medium-12 columns">
+    <hr>
+    <div class="row">
+      <div class="medium-12 columns">
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

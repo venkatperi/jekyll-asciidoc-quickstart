@@ -1,0 +1,84 @@
+<!doctype html>
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en"> <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <meta name="description"
+        content="webpkr - The webpack DSL">
+  <script src="http://localhost:8080/main.js"></script>
+  <link rel="stylesheet" href="http://localhost:8080/style.css">
+</head>
+<body>
+
+<!-- Nav Bar -->
+<nav class="top-bar" data-topbar>
+  <span class="name">
+      <a href="/"><img src="/assets/webpkr-white.svg"></a>
+  </span>
+  <span class="right">
+    <a href="https://github.com/venkatperi/webpkr"><i class="icon fa fa-github" aria-hidden="true"></i></a>
+  </span>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="container">
+  <div class="row">
+    <aside class="sidebar main-toc small-2 columns">
+      
+      
+      <h4><a href="/">Home</a></h4>
+      <ul class="nav">
+        
+        <li><a href="/installation">Installation</a></li>
+        
+        <li><a href="/dsl-reference">DSL Reference</a></li>
+        
+        <li><a href="/api">API</a></li>
+        
+        <li><a href="/examples">Examples</a></li>
+        
+      </ul>
+      
+      
+      <div id="toc"></div>
+    </aside>
+
+    <div class="small-9 columns" role="content">
+      <div class="sect2">
+<h3 id="configure_webpack">Configure Webpack</h3>
+<div class="paragraph">
+<p>Create a <code>webpack.config.js</code> in your project&#8217;s root and add:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const webpkr = require('webpkr');
+module.exports = webpkr({projectDir: __dirname});</code></pre>
+</div>
+</div>
+</div>
+    </div>
+  </div>
+</div>
+
+<!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+
+<footer class="row">
+  <div class="medium-12 columns">
+    <hr>
+    <div class="row">
+      <div class="medium-12 columns">
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
