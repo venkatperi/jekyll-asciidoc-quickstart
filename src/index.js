@@ -12,5 +12,11 @@ require( './toc' )
 $( document ).ready( function () {
   // foundation.Foundation.addToJquery( $ );
   // $( document ).foundation();
-  $( '#toc' ).toc({showSpeed: 0});
+  $( '#toc' ).toc( {
+    title: "<h4>Contents</h4>",
+    showSpeed: 0,
+    listType: 'ul',
+    headers: 'h2'
+
+  } );
 } );

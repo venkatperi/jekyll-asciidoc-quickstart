@@ -3,49 +3,52 @@
 <html class="lt-ie10" lang="en"> <![endif]-->
 <html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Example: Splitting Configuration into Multiple Files</title>
-    <meta name="description"
-          content="webpkr - The webpack DSL">
-    <!--<script src="http://localhost:8080/vendor.js"></script>-->
-    <script src="http://localhost:8080/main.js"></script>
-    <!--<script src="http://localhost:8080/modernizr.js"></script>-->
-    <link rel="stylesheet" href="http://localhost:8080/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example: Splitting Configuration into Multiple Files</title>
+  <meta name="description"
+        content="webpkr - The webpack DSL">
+  <!--<script src="http://localhost:8080/vendor.js"></script>-->
+  <script src="/build/main.js"></script>
+  <!--<script src="http://localhost:8080/modernizr.js"></script>-->
+  <link rel="stylesheet" href="/build/style.css">
 </head>
 <body>
 
 <!-- Nav Bar -->
 <nav class="top-bar" data-topbar>
-    <ul class="title-area">
-        <li class="name">
-            <h1><a href="/">webpkr</a></h1>
-        </li>
-        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
-    </ul>
+  <span class="name">
+      <a href="/"><img src="/assets/webpkr-white.svg"></a>
+  </span>
+  <span class="right">
+    <a href="https://github.com/venkatperi/webpkr"><i class="icon fa fa-github" aria-hidden="true"></i></a>
+  </span>
 </nav>
 <!-- End Nav -->
 
 
 <!-- Main Page Content and Sidebar -->
 <div class="row">
-    <aside class="main-toc medium-3 columns">
-        <h3><a href="/">Home</a></h3>
-        <ul class="nav">
-            <li><a href="/features">Webpkr Features</a></li>
-            <li><a href="/getting-started">Getting Started</a></li>
-            <li><a href="/dsl-reference">DSL Reference</a></li>
-        </ul>
-        <h4>Examples</h4>
-        <ul class="nav">
-            <li><a href="/examples/vendor-bundle">Explicit Vendor Bundle</a></li>
-            <li><a href="/examples/multi-env">Multiple Environments</a></li>
-            <li><a href="/examples/partition">Partitioning Build Logic</a></li>
-        </ul>
-        <div id="toc"></div>
-    </aside>
-    <div class="medium-9 columns" role="content">
-        <h1>Example: Splitting Configuration into Multiple Files</h1>
+  <aside class="main-toc medium-2 columns">
+    
+    
+    <h4><a href="http://localhost:8080//">Home</a></h4>
+    <ul class="nav">
+      
+      <li><a href="http://localhost:8080//installation">Installation</a></li>
+      
+      <li><a href="http://localhost:8080//features">Webpkr Features</a></li>
+      
+      <li><a href="http://localhost:8080//dsl-reference">DSL Reference</a></li>
+      
+    </ul>
+    
+    
+    <div id="toc"></div>
+  </aside>
+
+  <div class="medium-10 columns" role="content">
+    <h1>Example: Splitting Configuration into Multiple Files</h1>
 <div class="paragraph">
 <p><code>webpkr</code> configurations can be split into multiple files. Simply <code>require</code> the parts like any other nodejs module. e.g.:</p>
 </div>
@@ -103,7 +106,7 @@ module$( () =&gt; {
 } )</code></pre>
 </div>
 </div>
-    </div>
+  </div>
 </div>
 
 <!-- End Main Content and Sidebar -->
@@ -112,13 +115,13 @@ module$( () =&gt; {
 <!-- Footer -->
 
 <footer class="row">
-    <div class="medium-12 columns">
-        <hr>
-        <div class="row">
-            <div class="medium-12 columns">
-            </div>
-        </div>
+  <div class="medium-12 columns">
+    <hr>
+    <div class="row">
+      <div class="medium-12 columns">
+      </div>
     </div>
+  </div>
 </footer>
 
 </body>

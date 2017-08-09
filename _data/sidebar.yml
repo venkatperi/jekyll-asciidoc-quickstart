@@ -1,0 +1,11 @@
+- title: "Home"
+  href: "/"
+  items:
+    - title: "Installation"
+      href: "/installation"
+
+    - title: "Webpkr Features"
+      href: "/features"
+
+    - title: "DSL Reference"
+      href: "/dsl-reference"

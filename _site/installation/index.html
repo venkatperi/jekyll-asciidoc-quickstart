@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Webpkr Features</title>
+  <title>Installation</title>
   <meta name="description"
         content="webpkr - The webpack DSL">
   <!--<script src="http://localhost:8080/vendor.js"></script>-->
@@ -48,21 +48,59 @@
   </aside>
 
   <div class="medium-10 columns" role="content">
-    <h1>Webpkr Features</h1>
+    <div class="sect1">
+<h2 id="installation">Installation</h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>Webpkr provides:</p>
+<p>Install with <code>npm</code>:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ npm install --save-dev webpkr</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configure_webpack">Configure Webpack</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Create a <code>webpack.config.js</code> in your project&#8217;s root and add:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">const webpkr = require('webpkr');
+module.exports = webpkr({projectDir: __dirname});</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="configure_webpkr">Configure Webpkr</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>By default, webpkr looks for config scripts in a <code>./webpkr</code> module. Create a <code>webpkr</code> subdirectory in your project&#8217;s root and add file <code>index.js</code> in it:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ mkdir webpkr
+$ touch webpkr/index.js</code></pre>
+</div>
 </div>
 <div class="paragraph">
-<div class="title">Declarative builds</div>
-<p>The core of Webpack is a <em>domain specific language</em> (DSL) which lets you write JavaScript build scripts, rather than monolithic JavaScript objects. Webpkr provides declarative language elements which you can assemble as you like. Simply <code>require</code> reusable code to include it in your build.</p>
+<p>Add the following DSL script to <code>webpkr/index.js</code>:</p>
 </div>
-<div class="paragraph">
-<div class="title">Structure your build</div>
-<p>Webpkr makes it very easy to structure your build from reusable pieces of build logic, letting you partition code logically.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">context( projectDir )
+entry( './src/index.js')
+output( () =&gt; {
+  filename( 'bundle.js' )
+  path$( 'dist' )
+} )</code></pre>
 </div>
-<div class="paragraph">
-<div class="title">Multi-environment builds</div>
-<p>Webpak lets you target multiple environments (e.g. development, production) in the same build script so that you have a single truth of build logic. You no longer need to clone your base build for development and production.</p>
+</div>
+</div>
 </div>
   </div>
 </div>

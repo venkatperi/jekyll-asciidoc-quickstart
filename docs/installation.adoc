@@ -1,0 +1,39 @@
+= Installation
+:page-permalink: /installation/
+
+== Installation
+
+Install with `npm`:
+
+```bash
+$ npm install --save-dev webpkr
+```
+
+
+== Configure Webpack
+Create a `webpack.config.js` in your project's root and add:
+
+```javascript
+const webpkr = require('webpkr');
+module.exports = webpkr({projectDir: __dirname});
+```
+
+== Configure Webpkr
+
+By default, webpkr looks for config scripts in a `./webpkr` module. Create a `webpkr` subdirectory in your project's root and add file `index.js` in it:
+
+```bash
+$ mkdir webpkr
+$ touch webpkr/index.js
+```
+
+Add the following DSL script to `webpkr/index.js`:
+
+```javascript
+context( projectDir )
+entry( './src/index.js')
+output( () => {
+  filename( 'bundle.js' )
+  path$( 'dist' )
+} )
+```

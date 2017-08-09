@@ -1,9 +1,7 @@
 title: webpkr
 description: webpkr - The webpack DSL
 
-env:
-  dev:
-    baseurl: http://localhost:8080/
+url: http://localhost:8080/
 
 exclude:
   - LICENSE.adoc

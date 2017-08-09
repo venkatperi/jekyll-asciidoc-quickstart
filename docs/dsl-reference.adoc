@@ -60,45 +60,74 @@ entry('./src/another.js')
 
 |
 ```javascript
-{
-  entry: ['./src/index.js', './src/another.js']
-}
+entry: [
+  './src/index.js',
+  './src/another.js' ]
 ```
 |===
 
 
-=== `amd( string )`
+== Output
 
-bail( false )
-cache( true )
-dependency( 'dep-a' )
-dependency( 'dep-b' )
-devServer( {
-  inline: true,
-  contentBase: 'src',
-  port: 3001
+The top-level `output` script block configures `webpack` output settings.
+
+```javascript
+output(() =>{
+  filename( 'bundle.js' )
+  path$( 'dist' )
 } )
-devtool( 'cheap-module-source-map' )
-external( { react: 'react' } )
+```
 
-external( {
-  lodash: {
-    commonjs: "lodash",
-    amd: "lodash",
-    root: "_" // indicates global variable
-  }
+[NOTE]
+====
+To avoid potential name clashes, `output.path` is available as `path$`.
+====
+
+- link:https://webpack.js.org/configuration/output/#output-auxiliaryComment[auxiliaryComment(...)]
+- link:https://webpack.js.org/configuration/output/#output-chunkFilename[chunkFilename(...)]
+- link:https://webpack.js.org/configuration/output/#output-crossOriginLoading[crossOriginLoading(...)]
+- link:https://webpack.js.org/configuration/output/#output-chunkLoadTimeout[chunkLoadTimeout(...)]
+- link:https://webpack.js.org/configuration/output/#output-devtoolFallbackModuleFilenameTemplate[devtoolFallbackModuleFilenameTemplate(...)]
+- link:https://webpack.js.org/configuration/output/#output-devtoolLineToLine[devtoolLineToLine(...)]
+- link:https://webpack.js.org/configuration/output/#output-devtoolModuleFilenameTemplate[devtoolModuleFilenameTemplate(...)]
+- link:https://webpack.js.org/configuration/output/#output-filename[filename(...)]
+- link:https://webpack.js.org/configuration/output/#output-hashDigest[hashDigest(...)]
+- link:https://webpack.js.org/configuration/output/#output-hashDigestLength[hashDigestLength(...)]
+- link:https://webpack.js.org/configuration/output/#output-hashFunction[hashFunction(...)]
+- link:https://webpack.js.org/configuration/output/#output-hashSalt[hashSalt(...)]
+- link:https://webpack.js.org/configuration/output/#output-hotUpdateChunkFilename[hotUpdateChunkFilename(...)]
+- link:https://webpack.js.org/configuration/output/#output-hotUpdateFunction[hotUpdateFunction(...)]
+- link:https://webpack.js.org/configuration/output/#output-hotUpdateMainFilename[hotUpdateMainFilename(...)]
+- link:https://webpack.js.org/configuration/output/#output-jsonpFunction[jsonpFunction(...)]
+- link:https://webpack.js.org/configuration/output/#output-library[library(...)]
+- link:https://webpack.js.org/configuration/output/#output-libraryTarget[libraryTarget(...)]
+- link:https://webpack.js.org/configuration/output/#output-libraryExport[libraryExport(...)]
+- link:https://webpack.js.org/configuration/output/#output-path$[path$(...)]
+- link:https://webpack.js.org/configuration/output/#output-pathinfo[pathinfo(...)]
+- link:https://webpack.js.org/configuration/output/#output-publicPath[publicPath(...)]
+- link:https://webpack.js.org/configuration/output/#output-sourceMapFilename[sourceMapFilename(...)]
+- link:https://webpack.js.org/configuration/output/#output-sourcePrefix[sourcePrefix(...)]
+- link:https://webpack.js.org/configuration/output/#output-strictModuleExceptionHandling[strictModuleExceptionHandling(...)]
+- link:https://webpack.js.org/configuration/output/#output-umdNamedDefine[umdNamedDefine(...)]
+
+== Module
+
+The top-level `module$` script block configures the `webpack` module key.
+
+```javascript
+module$( () => {
+  rule( () => { } )
+  rule( () => { } )
 } )
+```
 
-external( {
-  subtract: {
-    root: ["math", "subtract"]
-  }
-} )
+`module$` provides the following script blocks:
 
-loader( {
-  some_value: 1  //expose custom value to loader
-} )
+=== `rule()`
 
+The `rule` script block defines a rule which is matched to requests when modules are created. Rule blocks are grouped into the `module.rules` array during the evaluation phase.
+
+```javascript
 module$( () => {
 
   rule( () => {
@@ -107,65 +136,35 @@ module$( () => {
       fallback: 'style-loader',
       use: 'css-loader',
     } ) )
-    include( srcDirs.css )
   } )
 
   rule( () => {
-    test( /\.js$/ )
-    use( 'babel-loader' )
-    include( path.resolve( srcDirs.js ) )
-    exclude( /node_modules/ )
-  } )
-
-} )
-
-module$( () => {
-  rule( () => {
-    test( /\.(ttf|eot|woff|woff2)$/ )
-    use( 'url-loader' )
+    test( /\.scss$/ )
+    use( ExtractTextPlugin.extract( {
+      fallback: 'style-loader',
+      use: [
+        { loader: 'css-loader' },
+        { loader: 'sass-loader' },
+      ]
+    } ) )
   } )
 } )
+```
 
-name( 'some name' )
+The following script blocks are available within the `rule` script block:
 
-node( {
-  module: 'empty',
-  net: 'empty',
-  child_process: 'empty',
-  tls: 'empty',
-  fs: 'empty'
-} )
-
-output( () => {
-  filename( 'bundle.js' )
-  path$( 'dist' )
-} )
-
-performance( () => {
-  maxEntrypointSize( 400000 )
-  maxAssetSize( 100000 )
-  hints( 'warning' )
-  assetFilter( f => f.endsWith( '.js' ), () => {
-  } )
-} )
-
-plugin(
-  new ExtractTextPlugin( {
-    filename: "style.css",
-    allChunks: true
-  } )
-)
-
-profile( true )
-
-recordsInputPath( path.join( __dirname, 'records.json' ) )
-recordsOutputPath( path.join( __dirname, 'newRecords.json' ) )
-recordsPath( path.join( __dirname, 'records.json' ) )
-
-resolve( () => {
-  alias( {
-    Utilities: path.resolve( __dirname, 'src/utilities/' ),
-    Templates: path.resolve( __dirname, 'src/templates/' )
-  } )
-  extensions( ['*', '.js', '.jsx'] )
-} )
+- link:https://webpack.js.org/configuration/module/#rule-enforce[enforce(...)]
+- link:https://webpack.js.org/configuration/module/#rule-exclude[exclude(...)]
+- link:https://webpack.js.org/configuration/module/#rule-include[include(...)]
+- link:https://webpack.js.org/configuration/module/#rule-issuer[issuer(...)]
+- link:https://webpack.js.org/configuration/module/#rule-loader[loader(...)]
+- link:https://webpack.js.org/configuration/module/#rule-loaders[loaders(...)]
+- link:https://webpack.js.org/configuration/module/#rule-oneOf[oneOf(...)]
+- link:https://webpack.js.org/configuration/module/#rule-options[options(...)]
+- link:https://webpack.js.org/configuration/module/#rule-parser[parser(...)]
+- link:https://webpack.js.org/configuration/module/#rule-query[query(...)]
+- link:https://webpack.js.org/configuration/module/#rule-resource[resource(...)]
+- link:https://webpack.js.org/configuration/module/#rule-resourceQuery[resourceQuery(...)]
+- link:https://webpack.js.org/configuration/module/#rule-compiler[compiler(...)]
+- link:https://webpack.js.org/configuration/module/#rule-test[test(...)]
+- link:https://webpack.js.org/configuration/module/#rule-use[use(...)]

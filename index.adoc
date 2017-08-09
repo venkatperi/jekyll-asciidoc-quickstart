@@ -4,60 +4,67 @@
 
 == webpkr
 
+
+[cols='2a,3a', frame=none, grid=rows]
+|===
+2+|
 [.lead]
 Webpkr is a build system for `webpack` configurations.
 
-[cols='2a,3a',frame=none,grid=rows]
-|===
-2+|
-=== Declarative Build Scripts
-
 |
+==== Declarative Build Scripts
 * Write declarative _build scripts_.
 * Stop _mutating_ monolithic objects.
-| ```javascript
+* Plain ol' JavaScript.
+.^| ```javascript
+ // base.js
 context( projectDir )
 entry( './src/index.js')
 output( () => {
   filename( 'bundle.js' )
-  path$( 'dist' )
-} )
+  path$( 'dist' ) } )
 ```
 
-2+|
-=== A Single Truth
-
 |
+==== Single Build Truth
 - All code in the same build script.
 - No need to clone configurations.
 
 |
 ```javascript
-// includes devtool only when NODE_ENV=development
-development(() => {
-  devtool( 'cheap-module-source-map' )
-})
+ // devtool.js
+ // only for NODE_ENV=development
+development( () => {
+  devtool( 'cheap-module-source-map' ) } )
 ```
 
-2+|
-=== Partition Logically
+|
+==== Logical Partitioning
+- Partition code logically for reuse.
 
 |
-- Partition your code logically.
+```javascript
+ // css.js
+plugin( new ExtractTextPlugin( ) )
+module$( () => {
+  rule( () => {
+    test( /\.css$/ )
+    use( ExtractTextPlugin.extract( {
+      use: 'css-loader', } ) ) } ) } )
+
+```
+
+|
+==== Just `require`
 - Order of assembly is unimportant.
 - Webpkr builds correct configuration object.
 
 |
 ```javascript
-// css.js
-plugin( new ExtractTextPlugin( ) )
-
-module$( () => {
-  rule( () => {
-    test( /\.css$/ )
-    use( ExtractTextPlugin.extract( { use: 'css-loader', } ) )
-} ) } )
-
+ //index.js
+require('./base')
+require('./devtool')
+require('./css')  //that's it
 ```
 |===
 
