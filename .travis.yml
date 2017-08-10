@@ -12,6 +12,7 @@ before_install:
   - rvm install 2.2.0
 
 install:
+  - npm install -g gulp
   - npm install
   - bundle install
   - gulp webpack:build
