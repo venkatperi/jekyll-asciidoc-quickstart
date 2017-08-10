@@ -25,6 +25,7 @@ exclude:
   - gulpfile.js
   - gulp.tasks.js
   - scss
+  - scripts
 
 asciidoc: {}
 
