@@ -1,5 +1,7 @@
 #!/bin/bash
 path_remove ()  { export PATH=`echo -n $PATH | awk -v RS=: -v ORS=: '$0 != "'$1'"' | sed 's/:$//'`; }
 
-path_remove "./node_modules/.bin"
+which awk
+which sed
+path_remove ./node_modules/.bin
 echo $PATH
