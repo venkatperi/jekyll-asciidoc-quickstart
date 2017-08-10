@@ -9,11 +9,11 @@ cache:
     - node_modules
 
 before_install:
-  - ./scripts
-  - echo "export rvm_max_time_flag=20" >> ~/.rvmrc
+  - mv node_modules _node_modules
   - rvm install 2.2.0
 
 install:
+  - mv _node_modules node_modules
   - npm install --silent
   - bundle install --path .bundle --quiet --without=development
 
