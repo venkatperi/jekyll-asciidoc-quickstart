@@ -1,7 +1,3 @@
-require( 'font-awesome/css/font-awesome.css' );
-require( '../css/foundation.css' );
-require( '../css/themes/github.css' );
-
 require( './highlight' )
 require( './toc' )
 

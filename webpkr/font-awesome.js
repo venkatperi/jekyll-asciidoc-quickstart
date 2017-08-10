@@ -1,0 +1,1 @@
+entry( { main: './node_modules/font-awesome/scss/font-awesome.scss' } )

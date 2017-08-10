@@ -1,21 +1,16 @@
-const { BundleAnalyzerPlugin } = require( 'webpack-bundle-analyzer' )
-
 context( projectDir )
 
-entry( { main: ['./src/index.js', './scss/style.scss'] } )
+entry( { main: './src/index.js' } )
 
 output( () => {
   path$( buildDir )
   filename( '[name].js' )
 } )
 
-development( () => {
-  devtool( 'cheap-module-source-map' )
-} )
-
-// plugin( new BundleAnalyzerPlugin() )
-
+require( './devtool' )
 require( './vendor' )
+require( './asciidoctor' )
+require( './font-awesome' )
 require( './js' )
 require( './css' )
 require( './images' )
@@ -23,3 +18,6 @@ require( './fonts' )
 require( './node' )
 require( './production' )
 require( './modernizr' )
+// require( './bundle_analyzer' )
+
+entry( { main: './scss/style.scss' } )
