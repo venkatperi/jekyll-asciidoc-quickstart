@@ -18,7 +18,7 @@ install:
   - bundle install --path .bundle --quiet --without=development
 
 script:
-  - NODE_ENV=production ./node_modules/.bin/webpack
+  - NODE_ENV=production ./node_modules/.bin/webpack --display errors-only
   - bundle exec rake deploy
 
 env:
