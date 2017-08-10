@@ -126,7 +126,13 @@ li {
   }
 }
 
+footer {
+  .build-info{
+    color: #b3b3b3;
+    font-size: 0.5em;
+  }
 
+}
 
 @media only screen and (max-width: 40em) {
   .sidebar {
