@@ -43,6 +43,6 @@
     "webpack": "^3.5.3",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.7.1",
-    "webpkr": "^0.1.6"
+    "webpkr": "^0.1.7"
   }
 }

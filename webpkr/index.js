@@ -1,6 +1,9 @@
 context( projectDir )
 
 entry( { main: './src/index.js' } )
+doLast( () => {
+  entry( { main: './scss/style.scss' } )
+} )
 
 output( () => {
   path$( buildDir )
@@ -20,4 +23,4 @@ require( './production' )
 require( './modernizr' )
 // require( './bundle_analyzer' )
 
-entry( { main: './scss/style.scss' } )
+

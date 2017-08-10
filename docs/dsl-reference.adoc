@@ -26,6 +26,31 @@ module.exports = require( 'webpkr' )( { projectDir: __dirname } );
 === `buildDir`
 The build directory of this project where all the output will be generated. Defaults to `projectDir/build`.
 
+== Environments
+`[development, production, testing, staging]`
+
+Environment script blocks allow conditional inclusion (or exclusion) during the evaluation phase based on the value of the `NODE_ENV` environment variable. To do this, wrap the block in the desired environment moniker:
+
+```javascript
+development( () => {
+    // this script block evaluated only when NODE_ENV=development
+})
+```
+
+== Evaluation Order
+`[doFirst, doLast]`
+
+In some cases, it may be necessary to control the order the order of evaluation, e.g. to ensure the order of loading of css files.
+
+=== `doFirst()`
+Instructs the evaluation phase to evaluate the nodes contained within before other nodes.
+
+=== `doLast()`
+Instructs the evaluation phase to evaluate the nodes contained within after other nodes.
+
+[NOTE]
+The order of evaluation within `doFirst` and `doLast` is not guaranteed.
+
 == Entry and Context
 
 === `context( )`

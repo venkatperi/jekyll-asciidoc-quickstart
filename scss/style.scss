@@ -4,7 +4,10 @@ $text-color: #333;
 $font-size: 1.05rem;
 $lead-font-size: 1.2rem;
 $code-font-size: 1.1rem;
+$code-font: Inconsolata, monospace;
 $page-width: 960px;
+$dashed-border: dashed 1px #e6e6e6;
+$code-background-color: #f5f5f5;
 
 body, p, h1, h2, h3, h4, h5, h6, ul, li {
   color: $text-color;
@@ -20,7 +23,7 @@ table tr {
 *:not(pre) > code {
   font-family: Inconsolata, monospace;
   font-size: $code-font-size;
-  background-color: #f5f5f5;
+  background-color: $code-background-color;
   color: #101010;
   border: none;
 }
@@ -37,23 +40,23 @@ p {
   font-size: $font-size;
 }
 
-.lead {
+.lead, .args {
   font-size: $lead-font-size;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 2.5em;
+  margin-top: 40px;
+  border: none;
+  border-bottom:  $dashed-border;
 }
 
 h3 {
   font-weight: 300;
-  font-size: 1.5rem;
-}
-
-.sect2 + .sect2 , .sect3 + .sect3 {
-  border-top: 2px dashed #ccc;
-  margin-top: 60px;
-  padding-top: 30px;
-}
-
-h3 code {
-  border: none;
+  font-size: 2.2em;
+  margin-top: 30px;
+  border-bottom: $dashed-border;
 }
 
 h4, h5 {
@@ -61,11 +64,45 @@ h4, h5 {
   font-size: $font-size;
 }
 
+.code-header {
+  &> h2, &>h3,&> h4, &>h5  {
+    font-weight: 300;
+    border-bottom: $dashed-border;
+  }
+
+  &> h3 {
+    font-size: 1.9em;
+  }
+
+  &> h4 {
+    font-size: 1.8em;
+  }
+}
+
+table.options {
+  td {
+    padding: 1px 10px;
+  }
+  code {
+    font-size: 1em;
+  }
+  p {
+    font-size: 0.95em;
+    margin-bottom: 0;
+  }
+}
+
 code {
   &.hljs {
     font-size: 0.9rem;
   }
   border: none;
+}
+
+.sect2 + .sect2 , .sect3 + .sect3 {
+  //border-top: 2px dashed #ccc;
+  // margin-top: 60px;
+  // padding-top: 30px;
 }
 
 .container {

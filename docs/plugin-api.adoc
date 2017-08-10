@@ -1,0 +1,120 @@
+= Webpkr Plugins API
+:showtitle:
+:page-permalink: /api/plugins
+
+Plugins are an easy way to extend core webpkr functionality:
+
+- Provide specialized script blocks (e.g. `EnvPlugin` provides environment script blocks).
+- Tap into the build cycle.
+- Extend or mutate build objects.
+
+
+== class BasePlugin
+
+Base class from which plugins are derived.
+
+[.code-header]
+=== constructor(name)
+[.options, cols=">1a,^1a,6a", frame=topbot, grid=rows]
+|===
+| *name* | `{String}` | The plugin's name.
+|===
+
+=== Properties
+
+[.code-header]
+==== .builder
+[.lead]
+Gets the builder with which this plugin is registered.
+
+[.options, cols=">1a,^1a,6a", frame=topbot, grid=rows]
+|===
+| *returns* | `{Webpkr}` | the builder.
+|===
+
+
+[.code-header]
+==== .name
+[.lead]
+Gets the plugin's name.
+
+[.options, cols=">1a,^1a,6a", frame=topbot, grid=rows]
+|===
+| *returns* | `{String}` | the plugin's name.
+|===
+
+
+=== Methods
+
+[.code-header]
+==== .afterEvaluate( value )
+[.lead]
+Called after all nodes are evaluated with the `webpack` configuration generated during the configuration phase.
+
+[.options, cols=">1a,^1a,6a", frame=topbot, grid=rows]
+|===
+| *value* | `{Object}` | Webpack configuration object.
+| *returns* | `{Object}` | The configuration object (original or mutated).
+|===
+
+The plugin can mutate the object and must return either the original or the mutated value. Plugins are called sequentially, the next receiving the value returned from the prior and the value returned from the final plugin is returned to the caller.
+
+
+[.code-header]
+==== .afterNodeEvaluate( node, value )
+[.lead]
+Called after each node is evaluated with the node and the result of evaluating the node.
+
+[.options, cols=">1a,^1a,6a", frame=topbot, grid=rows]
+|===
+| *node* | `{ConfigNode}` | node that was just evaluated. +
+| *value* | `{Object}` | result of evaluating the node. +
+| *returns* | `{Object}` | the evaluated value (original or mutated).
+|===
+
+The plugin may mutate the object and must return either the original or the mutated value. Plugins are called sequentially, the next receiving the value returned from the prior and the value returned from the final plugin is set on the node as the result of evaluation.
+
+
+[.code-header]
+==== .beforeNodeEvaluate( node )
+[.lead]
+Called before each node is evaluated with the node.
+
+[.options, cols=">1a,^1a,6a", frame=topbot, grid=rows]
+|===
+| *node* | `{ConfigNode}` | node that is due for evaluation.
+| *returns* | `{undefined}` | none.
+|===
+
+
+[.code-header]
+==== .registerObjects( )
+[.lead]
+Called during initialization to allow the plugin to register global objects such as custom script blocks.
+
+[.options, cols=">1a,^1a,6a", frame=topbot, grid=rows]
+|===
+| *returns* | `{undefined}` | none
+|===
+
+
+[.code-header]
+==== .shouldEvaluate( node )
+[.lead]
+Returns true if the specified node should be considered during evaluation.
+
+[.options, cols=">1a,^1a,6a", frame=topbot, grid=rows]
+|===
+| *node* | `{ConfigNode}` | the node to be evaluated.
+| *returns* | `{Boolean}` | true if the node should be evaluated, else false.
+|===
+
+[.code-header]
+==== .unregisterObjects( )
+[.lead]
+Called during cleanup to allow the plugin to release any global objects.
+
+[.options, cols=">1a,^1a,6a", frame=topbot, grid=rows]
+|===
+| *returns* | `{undefined}` | none
+|===

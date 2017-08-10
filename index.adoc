@@ -56,7 +56,7 @@ module$( () => {
 
 |
 ==== Just `require`
-- Order of assembly is unimportant.
+- Order of assembly is largely unimportant.
 - Webpkr builds correct configuration object.
 
 |
