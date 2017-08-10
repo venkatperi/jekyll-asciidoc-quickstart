@@ -3,12 +3,17 @@ language: node_js
 node_js:
   - "7"
 
+cache:
+  directories:
+    - vendor/bundle
+    - node_modules
+
 before_install:
   - rvm install 2.2.0
 
 install:
   - npm install
-  - bundle install
+  - bundle install --deployment
   - gulp webpack:build
   - bundle exec rake deploy
 
