@@ -12,10 +12,9 @@ before_install:
   - rvm install 2.2.0
 
 install:
-  - npm install -g gulp
-  - npm install
+  - npm install --quiet
   - bundle install --path .bundle --quiet --without=development
-  - NODE_ENV=production gulp webpack:build
+  - NODE_ENV=production ./node_modules/.bin/webpack
   - bundle exec rake deploy
 
 env:
