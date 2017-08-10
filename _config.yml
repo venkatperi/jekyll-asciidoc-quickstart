@@ -23,6 +23,7 @@ exclude:
   - webpkr
   - webpack.config.js
   - gulpfile.js
+  - gulp.tasks.js
   - scss
 
 asciidoc: {}
@@ -36,3 +37,6 @@ asciidoctor:
     - source-highlighter=highlightjs
     - icons=font
 
+google:
+  analytics:
+    id: "UA-62219190-2"

@@ -13,7 +13,7 @@ plugin( new webpack.ProvidePlugin( {
   $: 'jquery',
   jQuery: 'jquery',
   // highlight: 'highlight',
-  // foundation: 'foundation',
+  foundation: 'foundation',
 } ) )
 
 // plugin( new webpack.optimize.CommonsChunkPlugin( {

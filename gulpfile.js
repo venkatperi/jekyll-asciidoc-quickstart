@@ -1,90 +1,62 @@
 const gulp = require( 'gulp' );
-const child = require( 'child_process' );
-const gutil = require( 'gulp-util' );
-const Webpack = require( 'webpack' );
-const WebpackDevServer = require( 'webpack-dev-server' );
-var browserSync = require( 'browser-sync' ).create();
-const rimraf = require( 'rimraf' );
+const browserSync = require( 'browser-sync' ).create();
 const path = require( 'path' );
+const { glog, rmdirTask, spawnTask } = require( './gulp.tasks' )
 
-const webpackConfig = () => require( './webpack.config' )
+const task = gulp.task.bind( gulp )
+const watch = gulp.watch.bind( gulp )
+
+const cmds = {
+  webpack: './node_modules/.bin/webpack',
+  webpackDevServer: './node_modules/.bin/webpack-dev-server'
+}
 
 const buildDir = {
   jekyll: path.join( __dirname, '_site' ),
   webpack: path.join( __dirname, 'build' ),
 }
 
-function spawnTask( name, opts = {} ) {
-  opts.tag = opts.tag || name;
-
-  return gulp.task( name, opts.deps, ( done ) => {
-    const proc = child.spawn( opts.cmd, opts.args, opts.opts );
-
-    const logger = ( buffer ) => {
-      buffer.toString()
-        .split( /\n/ )
-        .forEach( ( message ) => gutil.log( `${opts.tag}: ${message}` ) );
-    };
-
-    proc.stdout.on( 'data', logger );
-    proc.stderr.on( 'data', logger );
-    proc.on( 'close', done );
-  } );
+const ports = {
+  webpack: '8080',
+  browserSync: '3000',
+  jekyll: '4000'
 }
 
-gulp.task( 'jekyll:clean', ( done ) => {
-  rimraf( buildDir.jekyll, done )
-} )
+rmdirTask( 'jekyll:clean', { dir: buildDir.jekyll } )
 
-gulp.task( 'webpack:clean', ( done ) => {
-  rimraf( buildDir.webpack, done )
-} )
-
-spawnTask( 'webpack:build', {
-  deps: ['webpack:clean'],
-  cmd: './node_modules/.bin/webpack',
-} )
-
-spawnTask( 'jekyll:build', {
-  deps: ['jekyll:clean', 'webpack:build'],
+spawnTask( 'jekyll:build', ['jekyll:clean', 'webpack:build'], {
   cmd: 'jekyll',
   args: ['build'],
 } )
 
-spawnTask( 'jekyll:serve', {
-  deps: ['jekyll:clean'],
+spawnTask( 'jekyll:serve', ['jekyll:clean'], {
   cmd: 'jekyll',
-  args: ['serve', '--watch', '--incremental'],
+  tag: 'jekyll',
+  args: ['serve', '--watch', '--incremental', '-P', `${ports.jekyll}`],
 } )
 
-gulp.task( 'webpack:serve', () => {
-  const compiler = Webpack( webpackConfig() )
-  const server = new WebpackDevServer( compiler, {
-    stats: {
-      colors: true
-    }
-  } );
+rmdirTask( 'webpack:clean', { dir: buildDir.webpack } )
 
-  server.listen( 8080, "127.0.0.1", function () {
-    console.log( "Starting server on http://localhost:8080" );
-  } );
-
+spawnTask( 'webpack:build', ['webpack:clean'], {
+  tag: 'webpack',
+  cmd: cmds.webpack,
 } )
 
-gulp.task( 'bs:reload', function ( done ) {
-  console.log( 'reloading' )
-  browserSync.reload();
-  done();
+spawnTask( 'webpack:serve', ['webpack:clean'], {
+  cmd: cmds.webpackDevServer,
+  tag: 'webpack',
 } )
 
-gulp.task( 'bs:serve', function () {
-  browserSync.init( {
-    proxy: "http://localhost:4000"
-  } );
-  gulp.watch( "_site/**/*", ['bs:reload'] );
-  gulp.watch( "build/**/*", ['bs:reload'] );
+task( 'bs:reload', () => browserSync.reload() )
+
+task( 'bs:serve', () => {
+  glog( 'browserSync', `Starting server on http://localhost:${ports.browserSync}` );
+  browserSync.init( { proxy: `http://localhost:${ports.jekyll}` } )
+  watch( "_site/**/*", ['bs:reload'] )
+  watch( "build/**/*", ['bs:reload'] )
 } );
 
-gulp.task( 'build', ['jekyll:build'] )
-gulp.task( 'serve', ['webpack:serve', 'jekyll:serve', 'bs:serve'] )
+task( 'build', ['jekyll:build'] )
+
+task( 'serve', ['webpack:serve', 'jekyll:serve', 'bs:serve'] )
 

@@ -1,4 +1,6 @@
 const ExtractTextPlugin = require( 'extract-text-webpack-plugin' )
+var OptimizeCssAssetsPlugin = require( 'optimize-css-assets-webpack-plugin' );
+
 
 plugin(
   new ExtractTextPlugin( {
@@ -7,7 +9,18 @@ plugin(
   } )
 )
 
+production( () => {
+  plugin(
+    new OptimizeCssAssetsPlugin( {
+      assetNameRegExp: /\.css$/g,
+      cssProcessor: require( 'cssnano' ),
+      cssProcessorOptions: { discardComments: { removeAll: true } },
+      canPrint: true
+    } ) )
+} )
+
 module$( () => {
+
   rule( () => {
     test( /\.css$/ )
     use( ExtractTextPlugin.extract( {
@@ -15,6 +28,7 @@ module$( () => {
       use: 'css-loader',
     } ) )
   } )
+
   rule( () => {
     test( /\.scss$/ )
     use( ExtractTextPlugin.extract( {

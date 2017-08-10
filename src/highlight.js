@@ -1,4 +1,4 @@
-var highlight = require( 'highlight.js' )
+var highlight = require( 'highlight.js/lib/highlight' );
 require( 'highlight.js/styles/default.css' );
 require( 'highlight.js/styles/darcula.css' );
 
