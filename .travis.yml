@@ -13,7 +13,7 @@ before_install:
 
 install:
   - npm install
-  - bundle install --deployment
+  - bundle install
   - gulp webpack:build
   - bundle exec rake deploy
 
