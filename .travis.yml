@@ -10,6 +10,7 @@ cache:
 
 before_install:
   - ./scripts
+  - echo "export rvm_max_time_flag=20" >> ~/.rvmrc
   - rvm install 2.2.0
 
 install:
