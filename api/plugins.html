@@ -1,0 +1,415 @@
+<!doctype html>
+<!--[if IE 9]>
+<html class="lt-ie10" lang="en"> <![endif]-->
+<html class="no-js" lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+<head>
+  
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webpkr Plugins API</title>
+  <meta name="description"
+        content="webpkr - The webpack DSL">
+  <link rel="stylesheet" href="https://venkatperi.github.io/webpkr-doc/build//style.css">
+</head>
+<body>
+
+<!-- Nav Bar -->
+<nav class="top-bar" data-topbar>
+  <span class="name">
+      <a href="https://venkatperi.github.io/webpkr-doc/"><img id="site-icon" src="https://venkatperi.github.io/webpkr-doc//assets/webpkr-white.svg"></a>
+  </span>
+  <span class="right">
+    <a href="https://github.com/venkatperi/webpkr"><i class="icon fa fa-github" aria-hidden="true"></i></a>
+  </span>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="container">
+  <div class="row">
+    <aside class="sidebar main-toc small-2 columns">
+      
+      
+      <h4><a href="https://venkatperi.github.io/webpkr-doc//">Home</a></h4>
+      <ul class="nav">
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//installation">Installation</a></li>
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//dsl-reference">DSL Reference</a></li>
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//api">API</a></li>
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//examples">Examples</a></li>
+        
+      </ul>
+      
+      
+      <div id="toc"></div>
+    </aside>
+
+    <div class="small-9 columns" role="content">
+      <h1>Webpkr Plugins API</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>Plugins are an easy way to extend core webpkr functionality:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Provide specialized script blocks (e.g. <code>EnvPlugin</code> provides environment script blocks).</p>
+</li>
+<li>
+<p>Tap into the build cycle.</p>
+</li>
+<li>
+<p>Extend or mutate build objects.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="class_baseplugin">class BasePlugin</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Base class from which plugins are derived.</p>
+</div>
+<div class="sect2 code-header">
+<h3 id="constructor_name">constructor(name)</h3>
+<table class="tableblock frame-topbot grid-rows spread options">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>name</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{String}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>The plugin&#8217;s name.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="properties">Properties</h3>
+<div class="sect3 code-header">
+<h4 id="builder">.builder</h4>
+<div class="paragraph lead">
+<p>Gets the builder with which this plugin is registered.</p>
+</div>
+<table class="tableblock frame-topbot grid-rows spread options">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>returns</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{Webpkr}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>the builder.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3 code-header">
+<h4 id="name">.name</h4>
+<div class="paragraph lead">
+<p>Gets the plugin&#8217;s name.</p>
+</div>
+<table class="tableblock frame-topbot grid-rows spread options">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>returns</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{String}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>the plugin&#8217;s name.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="methods">Methods</h3>
+<div class="sect3 code-header">
+<h4 id="afterevaluate_value">.afterEvaluate( value )</h4>
+<div class="paragraph lead">
+<p>Called after all nodes are evaluated with the <code>webpack</code> configuration generated during the configuration phase.</p>
+</div>
+<table class="tableblock frame-topbot grid-rows spread options">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>value</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{Object}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>Webpack configuration object.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>returns</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{Object}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>The configuration object (original or mutated).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The plugin can mutate the object and must return either the original or the mutated value. Plugins are called sequentially, the next receiving the value returned from the prior and the value returned from the final plugin is returned to the caller.</p>
+</div>
+</div>
+<div class="sect3 code-header">
+<h4 id="afternodeevaluate_node_value">.afterNodeEvaluate( node, value )</h4>
+<div class="paragraph lead">
+<p>Called after each node is evaluated with the node and the result of evaluating the node.</p>
+</div>
+<table class="tableblock frame-topbot grid-rows spread options">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>node</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{ConfigNode}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>node that was just evaluated.<br></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>value</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{Object}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>result of evaluating the node.<br></p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>returns</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{Object}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>the evaluated value (original or mutated).</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The plugin may mutate the object and must return either the original or the mutated value. Plugins are called sequentially, the next receiving the value returned from the prior and the value returned from the final plugin is set on the node as the result of evaluation.</p>
+</div>
+</div>
+<div class="sect3 code-header">
+<h4 id="beforenodeevaluate_node">.beforeNodeEvaluate( node )</h4>
+<div class="paragraph lead">
+<p>Called before each node is evaluated with the node.</p>
+</div>
+<table class="tableblock frame-topbot grid-rows spread options">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>node</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{ConfigNode}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>node that is due for evaluation.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>returns</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{undefined}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>none.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3 code-header">
+<h4 id="registerobjects">.registerObjects( )</h4>
+<div class="paragraph lead">
+<p>Called during initialization to allow the plugin to register global objects such as custom script blocks.</p>
+</div>
+<table class="tableblock frame-topbot grid-rows spread options">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>returns</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{undefined}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>none</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3 code-header">
+<h4 id="shouldevaluate_node">.shouldEvaluate( node )</h4>
+<div class="paragraph lead">
+<p>Returns true if the specified node should be considered during evaluation.</p>
+</div>
+<table class="tableblock frame-topbot grid-rows spread options">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>node</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{ConfigNode}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>the node to be evaluated.</p>
+</div></div></td>
+</tr>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>returns</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{Boolean}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>true if the node should be evaluated, else false.</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect3 code-header">
+<h4 id="unregisterobjects">.unregisterObjects( )</h4>
+<div class="paragraph lead">
+<p>Called during cleanup to allow the plugin to release any global objects.</p>
+</div>
+<table class="tableblock frame-topbot grid-rows spread options">
+<colgroup>
+<col style="width: 12.5%;">
+<col style="width: 12.5%;">
+<col style="width: 75%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-right valign-top"><div><div class="paragraph">
+<p><strong>returns</strong></p>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="paragraph">
+<p><code>{undefined}</code></p>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="paragraph">
+<p>none</p>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+    </div>
+  </div>
+</div>
+
+<footer class="row">
+  <div class="small-12 columns">
+    <span class="build-info">
+    Build <span class="build-number">42</span>
+    &nbsp;&nbsp;|&nbsp;&nbsp; <span class="build-time">2017-08-10 22:36:10 +0000</span>
+    </span>
+  </div>
+</footer>
+
+<script src="https://venkatperi.github.io/webpkr-doc/build//main.js"></script>
+
+<script>
+  (function ( i, s, o, g, r, a, m ) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+      (i[r].q = i[r].q || []).push( arguments )
+    }, i[r].l = 1 * new Date();
+    a = s.createElement( o ),
+      m = s.getElementsByTagName( o )[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore( a, m )
+  })( window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga' );
+
+  ga( 'create', 'UA-62219190-2', 'auto' );
+  ga( 'send', 'pageview' );
+
+</script>
+
+
+</body>
+</html>

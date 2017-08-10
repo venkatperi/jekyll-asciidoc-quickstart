@@ -108,6 +108,59 @@ module.exports = require( 'webpkr' )( { projectDir: __dirname } );</code></pre>
 </div>
 </div>
 <div class="sect1">
+<h2 id="environments">Environments</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>[development, production, testing, staging]</code></p>
+</div>
+<div class="paragraph">
+<p>Environment script blocks allow conditional inclusion (or exclusion) during the evaluation phase based on the value of the <code>NODE_ENV</code> environment variable. To do this, wrap the block in the desired environment moniker:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">development( () =&gt; {
+    // this script block evaluated only when NODE_ENV=development
+})</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="evaluation_order">Evaluation Order</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><code>[doFirst, doLast]</code></p>
+</div>
+<div class="paragraph">
+<p>In some cases, it may be necessary to control the order the order of evaluation, e.g. to ensure the order of loading of css files.</p>
+</div>
+<div class="sect2">
+<h3 id="code_dofirst_code"><code>doFirst()</code></h3>
+<div class="paragraph">
+<p>Instructs the evaluation phase to evaluate the nodes contained within before other nodes.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="code_dolast_code"><code>doLast()</code></h3>
+<div class="paragraph">
+<p>Instructs the evaluation phase to evaluate the nodes contained within after other nodes.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The order of evaluation within <code>doFirst</code> and <code>doLast</code> is not guaranteed.
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="entry_and_context">Entry and Context</h2>
 <div class="sectionbody">
 <div class="sect2">
@@ -408,8 +461,8 @@ entry('./src/another.js')</code></pre>
 <footer class="row">
   <div class="small-12 columns">
     <span class="build-info">
-    Build <span class="build-number">41</span>
-    &nbsp;&nbsp;|&nbsp;&nbsp; <span class="build-time">2017-08-10 14:25:39 +0000</span>
+    Build <span class="build-number">42</span>
+    &nbsp;&nbsp;|&nbsp;&nbsp; <span class="build-time">2017-08-10 22:36:10 +0000</span>
     </span>
   </div>
 </footer>
