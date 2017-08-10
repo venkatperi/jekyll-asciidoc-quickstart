@@ -9,6 +9,7 @@ cache:
     - node_modules
 
 before_install:
+  - echo $PATH
   - rvm install 2.2.0
 
 install:
