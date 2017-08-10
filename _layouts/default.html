@@ -10,7 +10,6 @@
   <title>{{page.title}}</title>
   <meta name="description"
         content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
-  <script src="{{ buildUrl }}/main.js"></script>
   <link rel="stylesheet" href="{{ buildUrl }}/style.css">
 </head>
 <body>
@@ -60,6 +59,7 @@
   </div>
 </footer>
 
+<script src="{{ buildUrl }}/main.js"></script>
 {% if jekyll.environment == "production" %}
 <script>
   (function ( i, s, o, g, r, a, m ) {
