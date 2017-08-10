@@ -9,11 +9,11 @@ __cache:
     - node_modules
 
 before_install:
-#  - ./scripts
+  - ./scripts
   - rvm install 2.2.0
 
 install:
-  - npm install --quiet
+  - npm install --silent
   - bundle install --path .bundle --quiet --without=development
 
 script:
