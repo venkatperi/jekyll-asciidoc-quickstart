@@ -39,10 +39,18 @@ function spawnTask( name, deps, opts, fn ) {
 const rmdirTask = ( name, opts = {} ) =>
   gulp.task( name, opts.deps, ( done ) => rimraf( opts.dir, done ) )
 
+const delay = ( name, duration ) => {
+  return gulp.task( name, ( done ) => {
+    setTimeout( done, 5000 )
+  } )
+}
+
+
 const glog = ( tag, msg ) => gutil.log( `${tag}: ${msg}` )
 
 module.exports = {
   rmdirTask,
   spawnTask,
-  glog
+  glog,
+  delay,
 }

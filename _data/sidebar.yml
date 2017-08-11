@@ -10,5 +10,8 @@
     - title: "API"
       href: "/api"
 
+    - title: "Plugin API"
+      href: "/api/plugins"
+
     - title: "Examples"
       href: "/examples"

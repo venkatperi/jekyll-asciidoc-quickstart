@@ -8,5 +8,6 @@ node_modules/
 dist/
 .coveralls.yml
 coverage/
+.ignore
 tmp/
 gen/

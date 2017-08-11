@@ -9,12 +9,11 @@ resolve( () => {
   // alias( { highlight: 'highlight.js/lib/highlight' } )
 } )
 
-plugin( new webpack.ProvidePlugin( {
+provide( {
   $: 'jquery',
   jQuery: 'jquery',
-  // highlight: 'highlight',
   foundation: 'foundation',
-} ) )
+} )
 
 // plugin( new webpack.optimize.CommonsChunkPlugin( {
 //   name: 'vendor',

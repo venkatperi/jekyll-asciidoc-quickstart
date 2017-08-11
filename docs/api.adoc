@@ -2,54 +2,49 @@
 :showtitle:
 :page-permalink: /api/
 
-== require
+[NOTE]
+====
 ```javascript
 webpkr = require('webpkr');
 ```
+====
 
-== webpkr(opts)
+== webpkr( opts )
 
+[.lead]
 Creates a new instance of `Webpkr` with the supplied options and calls `buildFile()` on it and returns the resulting `webpack` configuration.
 
-[cols="1a,1a,4a,2a", options="header"]
+== class webpkr.Webpkr
+
+[.code-header]
+=== constructor( opts )
+
+[.options, cols=">1s,^1a,5a,2a", frame=topbot, grid=rows]
 |===
-| option | type | description | default
 
+| opts.config | `{String}` | webpkr initialization module | `./webpkr`
 
-| `opts.config`
-| `{String}`
-| The webpkr configuration module
-| `./webpkr`
+| opts.projectDir | `{String}` | project directory | `process.cwd()`
 
-| `opts.projectDir`
-| `{String}`
-| The project directory.
-| `process.cwd()`
+| opts.buildDir | `{String}` | directory where output is written | `projectDir/build`
 
-| `opts.buildDir`
-| `{String}`
-| The build directory where output is written.
-| `projectDir/build`.
-
-| `opts.environments`
-| `{String[]}`
-| The `node.js` environments.
-| `['development', 'production', 'testing', 'staging']`.
+| opts.environments | `{String[]}` | `node.js` environments | `['development', 'production', 'testing', 'staging']`
 
 |===
 
-== webpkr.Webpkr
-
-=== Webpkr(opts)
-See `webpkr()` above for option details.
 
 === Members
 
+[.code-header]
 ==== compile(closure)
-- `closure` `{Function}` Contains the build script.
-- Returns `{Object}` the configuration tree.
-
+[.lead]
 Compiles the supplied DSL build script into a configuration tree.
+
+[.options, cols=">1s,^1a,6a", frame=topbot, grid=rows]
+|===
+| closure | `{Function}` | the build script
+| returns | `{Object}` | configuration tree
+|===
 
 .Example
 ```javascript
@@ -80,18 +75,30 @@ console.log( tree.toAsciiTree() );
 
 ```
 
-==== compileFile(file)
-- `file` `{String}` path to file containing DSL build script
-- Returns `{Object}` the configuration tree.
+[.code-header]
+==== compileFile( file )
 
+[.lead]
 Loads the DSL build script from the supplied file and returns the compiled configuration tree. Relative paths are resolved from `projectDir`.
 
+[.options, cols=">1s,^1a,6a", frame=topbot, grid=rows]
+|===
+| file | `{String}` | path to the build script
+| returns | `{Object}` | configuration tree
+|===
 
+
+
+[.code-header]
 ==== buildFile(file)
-- `file` `{String}` path to file containing DSL build script
-- Returns `{Function}` `webpack` configuration.
-
+[.lead]
 Loads the DSL build script from the supplied file, builds it and returns a `Function` which can be passed to `webpack`.
+
+[.options, cols=">1s,^1a,6a", frame=topbot, grid=rows]
+|===
+| file | `{String}` | path to the build script
+| returns | `{Function}` | webpack configuration
+|===
 
 [NOTE]
 The returned `Function` accepts a single parameter. The `webpack` CLI uses this parameter to pass commandline arguments set via `--env` to the configuration script. These arguments are avilable via a global object `cliArgs`.
@@ -100,11 +107,15 @@ The returned `Function` accepts a single parameter. The `webpack` CLI uses this 
 When using the `webpack` Node API, the function must be called and the resulting object should be passed to `webpack()`.
 
 === Events
+
+[.code-header]
 ==== afterCompile
 Emitted after the DSL is compiled into a configuration tree. The tree is passed as the only argument to the event.
 
+[.code-header]
 ==== afterNodeEvaluate
 Emitted during the evaluation phase, after each node is evaluated. The current node and its evaluated value are passed as arguments.
 
+[.code-header]
 ==== afterEvaluate
 Emitted after the entire configuration tree is evaluated. The final `webpack` configuration object is passed as the only argument.

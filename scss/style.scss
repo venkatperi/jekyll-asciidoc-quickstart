@@ -47,27 +47,41 @@ p {
 h2 {
   font-weight: 600;
   font-size: 2.5em;
-  margin-top: 40px;
-  border: none;
   border-bottom:  $dashed-border;
 }
 
 h3 {
   font-weight: 300;
   font-size: 2.2em;
-  margin-top: 30px;
   border-bottom: $dashed-border;
 }
 
-h4, h5 {
+h4{
   font-weight: 700;
   font-size: $font-size;
+}
+
+h5 {
+  font-weight: 700;
+  font-size: $font-size;
+}
+
+
+.sect2 + .sect2 {
+  margin-top: 50px;
 }
 
 .code-header {
   &> h2, &>h3,&> h4, &>h5  {
     font-weight: 300;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border: none;
     border-bottom: $dashed-border;
+  }
+
+  &.sect3 + &.sect3 {
+    margin-top: 50px;
   }
 
   &> h3 {
@@ -97,12 +111,6 @@ code {
     font-size: 0.9rem;
   }
   border: none;
-}
-
-.sect2 + .sect2 , .sect3 + .sect3 {
-  //border-top: 2px dashed #ccc;
-  // margin-top: 60px;
-  // padding-top: 30px;
 }
 
 .container {

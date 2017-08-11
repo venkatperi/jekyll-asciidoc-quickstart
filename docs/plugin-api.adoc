@@ -118,3 +118,10 @@ Called during cleanup to allow the plugin to release any global objects.
 |===
 | *returns* | `{undefined}` | none
 |===
+
+=== Events
+
+[.code-header]
+==== .added
+[.lead]
+Emitted by the plugin after it's registered with a builder. This is a good time to listen to events on the builder.

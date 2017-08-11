@@ -1,7 +1,7 @@
 const gulp = require( 'gulp' );
 const browserSync = require( 'browser-sync' ).create();
 const path = require( 'path' );
-const { glog, rmdirTask, spawnTask } = require( './gulp.tasks' )
+const { delay, glog, rmdirTask, spawnTask } = require( './gulp.tasks' )
 
 const task = gulp.task.bind( gulp )
 const watch = gulp.watch.bind( gulp )
@@ -49,11 +49,14 @@ spawnTask( 'webpack:serve', ['webpack:clean'], {
 
 task( 'bs:reload', () => browserSync.reload() )
 
-task( 'bs:serve', () => {
+delay( 'bs:delay', 5000 )
+
+task( 'bs:serve', ['bs:delay'], () => {
   glog( 'browserSync', `Starting server on http://localhost:${ports.browserSync}` );
   browserSync.init( { proxy: `http://localhost:${ports.jekyll}` } )
   watch( "_site/**/*", ['bs:reload'] )
   watch( "build/**/*", ['bs:reload'] )
+  watch( ".ignore", ['bs:reload'] )
 } );
 
 task( 'build', ['jekyll:build'] )
