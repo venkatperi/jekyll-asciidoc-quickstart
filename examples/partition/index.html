@@ -7,7 +7,7 @@
   
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Example: Splitting Configuration into Multiple Files</title>
+  <title>Example: Split Configuration into Multiple Files</title>
   <meta name="description"
         content="webpkr - The webpack DSL">
   <link rel="stylesheet" href="https://venkatperi.github.io/webpkr-doc/build//style.css">
@@ -29,31 +29,10 @@
 <!-- Main Page Content and Sidebar -->
 <div class="container">
   <div class="row">
-    <aside class="sidebar main-toc small-2 columns">
-      
-      
-      <h4><a href="https://venkatperi.github.io/webpkr-doc//">Home</a></h4>
-      <ul class="nav">
-        
-        <li><a href="https://venkatperi.github.io/webpkr-doc//installation">Installation</a></li>
-        
-        <li><a href="https://venkatperi.github.io/webpkr-doc//dsl-reference">DSL Reference</a></li>
-        
-        <li><a href="https://venkatperi.github.io/webpkr-doc//api">API</a></li>
-        
-        <li><a href="https://venkatperi.github.io/webpkr-doc//api/plugins">Plugin API</a></li>
-        
-        <li><a href="https://venkatperi.github.io/webpkr-doc//examples">Examples</a></li>
-        
-      </ul>
-      
-      
-      <div id="toc"></div>
-    </aside>
 
-    <div class="small-9 columns" role="content">
-      <div class="sect1">
-<h2 id="example_splitting_configuration_into_multiple_files">Example: Splitting Configuration into Multiple Files</h2>
+    <div class="small-12 medium-9 columns" role="content">
+      <h1>Example: Split Configuration into Multiple Files</h1>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
 <p><code>webpkr</code> configurations can be split into multiple files. Simply <code>require</code> the parts like any other nodejs module.</p>
@@ -69,6 +48,8 @@
 </td>
 </tr>
 </table>
+</div>
+</div>
 </div>
 <div class="sect3">
 <h4 id="webpack_index_js">webpack/index.js</h4>
@@ -136,17 +117,38 @@ module.exports = webpkr({projectDir: __dirname});</code></pre>
 </div>
 </div>
 </div>
-</div>
-</div>
     </div>
+
+    <aside class="sidebar main-toc medium-2 small-12 columns">
+      
+      
+      <h4><a href="https://venkatperi.github.io/webpkr-doc//">Home</a></h4>
+      <ul class="nav">
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//installation">Installation</a></li>
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//dsl-reference">DSL Reference</a></li>
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//api">API</a></li>
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//api/plugins">Plugin API</a></li>
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//examples">Examples</a></li>
+        
+      </ul>
+      
+      
+      <div id="toc"></div>
+    </aside>
+
   </div>
 </div>
 
 <footer class="row">
   <div class="small-12 columns">
     <span class="build-info">
-    Build <span class="build-number">43</span>
-    &nbsp;&nbsp;|&nbsp;&nbsp; <span class="build-time">2017-08-11 02:32:29 +0000</span>
+    Build <span class="build-number">44</span>
+    &nbsp;&nbsp;|&nbsp;&nbsp; <span class="build-time">2017-08-11 16:40:27 +0000</span>
     </span>
   </div>
 </footer>

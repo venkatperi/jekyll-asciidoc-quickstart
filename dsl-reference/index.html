@@ -29,29 +29,8 @@
 <!-- Main Page Content and Sidebar -->
 <div class="container">
   <div class="row">
-    <aside class="sidebar main-toc small-2 columns">
-      
-      
-      <h4><a href="https://venkatperi.github.io/webpkr-doc//">Home</a></h4>
-      <ul class="nav">
-        
-        <li><a href="https://venkatperi.github.io/webpkr-doc//installation">Installation</a></li>
-        
-        <li><a href="https://venkatperi.github.io/webpkr-doc//dsl-reference">DSL Reference</a></li>
-        
-        <li><a href="https://venkatperi.github.io/webpkr-doc//api">API</a></li>
-        
-        <li><a href="https://venkatperi.github.io/webpkr-doc//api/plugins">Plugin API</a></li>
-        
-        <li><a href="https://venkatperi.github.io/webpkr-doc//examples">Examples</a></li>
-        
-      </ul>
-      
-      
-      <div id="toc"></div>
-    </aside>
 
-    <div class="small-9 columns" role="content">
+    <div class="small-12 medium-9 columns" role="content">
       <h1>webpkr Build Language Reference</h1>
 <div id="preamble">
 <div class="sectionbody">
@@ -76,22 +55,36 @@ Under Development.
 <h2 id="script_structure">Script Structure</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>A configuration script is made of up of multiple statements and script blocks. A script block inserts a new node in the the <em>configuration tree</em> and takes optional parameters. If the final parameter is a closure, it is treated as a <em>configuration closure</em> which configures the newly created node. Any optional parameters are available to the node during the subsequent evaluation phase.</p>
+<p>A configuration script is made of up of multiple statements and script blocks. A script block inserts a new node in the the <em>configuration tree</em> and takes optional parameters.</p>
 </div>
 <div class="paragraph">
+<div class="title">Configuration Closure</div>
+<p>If the final parameter is a closure, it is treated as a <em>configuration closure</em> which configures the newly created node. Any optional parameters are available to the node during the subsequent evaluation phase.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">// optional arguments
+block([{*}, ..., {*},] () =&gt; {
+    // configuration closure
+})</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<div class="title">Naming Convention</div>
 <p>Top level script blocks map to top level keys of the <code>webpack</code> configuration object. Where there is a potential clash of names (e.g. with <code>module</code> or <code>path</code>), the script block name is appended with a <code>$</code> symbol.</p>
 </div>
 <div class="paragraph">
+<div class="title">Plain Ol' JavaScript</div>
 <p>The build script is JavaScript code, and can contain any valid JavaScript, such as method definitions, <code>require</code> statements, classes etc.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="builder_global_variables">Builder/Global Variables</h2>
+<h2 id="globals">Globals</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="code_projectdir_code"><code>projectDir</code></h3>
-<div class="paragraph">
+<div class="sect2 code-header">
+<h3 id="projectdir">projectDir</h3>
+<div class="paragraph lead">
 <p>The directory containing the project build file. Defaults to <code>process.cwd()</code>.</p>
 </div>
 <div class="listingblock">
@@ -101,28 +94,70 @@ module.exports = require( 'webpkr' )( { projectDir: __dirname } );</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="code_builddir_code"><code>buildDir</code></h3>
-<div class="paragraph">
+<div class="sect2 code-header">
+<h3 id="builddir">buildDir</h3>
+<div class="paragraph lead">
 <p>The build directory of this project where all the output will be generated. Defaults to <code>projectDir/build</code>.</p>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="environments">Environments</h2>
+<h2 id="multiple_environments">multiple Environments</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><code>[development, production, testing, staging]</code></p>
+<div class="paragraph lead">
+<p>Environment script blocks allow conditional inclusion (or exclusion) during the evaluation phase based on the value of the <code>NODE_ENV</code> environment variable.</p>
 </div>
+<div class="sect2 code-header">
+<h3 id="development">development()</h3>
 <div class="paragraph">
-<p>Environment script blocks allow conditional inclusion (or exclusion) during the evaluation phase based on the value of the <code>NODE_ENV</code> environment variable. To do this, wrap the block in the desired environment moniker:</p>
+<p>Sub-blocks are evaluated only when <code>NODE_ENV=development</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">development( () =&gt; {
-    // this script block evaluated only when NODE_ENV=development
+  // development-only scripts
 })</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2 code-header">
+<h3 id="production">production()</h3>
+<div class="paragraph">
+<p>Sub-blocks are evaluated only when <code>NODE_ENV=production</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">production( () =&gt; {
+  // production-only scripts
+})</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2 code-header">
+<h3 id="testing">testing()</h3>
+<div class="paragraph">
+<p>Sub-blocks are evaluated only when <code>NODE_ENV=testing</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">testing( () =&gt; {
+  // testing-only scripts
+})</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2 code-header">
+<h3 id="staging">staging()</h3>
+<div class="paragraph">
+<p>Sub-blocks are evaluated only when <code>NODE_ENV=staging</code>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">staging( () =&gt; {
+  // staging-only scripts
+})</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -130,22 +165,53 @@ module.exports = require( 'webpkr' )( { projectDir: __dirname } );</code></pre>
 <div class="sect1">
 <h2 id="evaluation_order">Evaluation Order</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p><code>[doFirst, doLast]</code></p>
-</div>
-<div class="paragraph">
+<div class="paragraph lead">
 <p>In some cases, it may be necessary to control the order the order of evaluation, e.g. to ensure the order of loading of css files.</p>
 </div>
-<div class="sect2">
-<h3 id="code_dofirst_code"><code>doFirst()</code></h3>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Do not depend solely on the position of a script block if order of evaluation is important.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2 code-header">
+<h3 id="dofirst">doFirst()</h3>
 <div class="paragraph">
 <p>Instructs the evaluation phase to evaluate the nodes contained within before other nodes.</p>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">// ensures that base.css is loaded before style.css
+
+entry({main: './css/style.css'})
+
+doFirst( () =&gt; {
+  entry({main: './css/base.css'})
+})</code></pre>
 </div>
-<div class="sect2">
-<h3 id="code_dolast_code"><code>doLast()</code></h3>
+</div>
+</div>
+<div class="sect2 code-header">
+<h3 id="dolast">doLast()</h3>
 <div class="paragraph">
 <p>Instructs the evaluation phase to evaluate the nodes contained within after other nodes.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">// ensures that style.css is loaded after base.css
+
+doLast( () =&gt; {
+  entry({main: './css/style.css'})
+})
+
+entry({main: './css/base.css'})</code></pre>
+</div>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -165,8 +231,8 @@ The order of evaluation within <code>doFirst</code> and <code>doLast</code> is n
 <div class="sect1">
 <h2 id="entry_and_context">Entry and Context</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="code_context_code"><code>context( )</code></h3>
+<div class="sect2 code-header">
+<h3 id="context">context( )</h3>
 <div class="paragraph">
 <p><code>string</code></p>
 </div>
@@ -175,13 +241,13 @@ The order of evaluation within <code>doFirst</code> and <code>doLast</code> is n
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">// context = projectDir/src
-context('src')</code></pre>
+<pre class="highlightjs highlight"><code class="language-javascript hljs" data-lang="javascript">context('src')
+// =&gt; projectDir/src</code></pre>
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="code_entry_code"><code>entry()</code></h3>
+<div class="sect2 code-header">
+<h3 id="entry">entry()</h3>
 <div class="paragraph">
 <p><code>string | [string] | object { &lt;key&gt;: string | [string] }</code></p>
 </div>
@@ -245,7 +311,7 @@ entry('./src/another.js')</code></pre>
 <div class="sect1">
 <h2 id="output">Output</h2>
 <div class="sectionbody">
-<div class="paragraph">
+<div class="paragraph lead">
 <p>The top-level <code>output</code> script block configures <code>webpack</code> output settings.</p>
 </div>
 <div class="listingblock">
@@ -357,7 +423,7 @@ entry('./src/another.js')</code></pre>
 <div class="sect1">
 <h2 id="module">Module</h2>
 <div class="sectionbody">
-<div class="paragraph">
+<div class="paragraph lead">
 <p>The top-level <code>module$</code> script block configures the <code>webpack</code> module key.</p>
 </div>
 <div class="listingblock">
@@ -368,11 +434,22 @@ entry('./src/another.js')</code></pre>
 } )</code></pre>
 </div>
 </div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
 <div class="paragraph">
-<p><code>module$</code> provides the following script blocks:</p>
+<p>To avoid name clashes, <code>output.path</code> is available as <code>path$</code>.</p>
 </div>
-<div class="sect2">
-<h3 id="code_rule_code"><code>rule()</code></h3>
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2 code-header">
+<h3 id="rule">rule()</h3>
 <div class="paragraph">
 <p>The <code>rule</code> script block defines a rule which is matched to requests when modules are created. Rule blocks are grouped into the <code>module.rules</code> array during the evaluation phase.</p>
 </div>
@@ -457,14 +534,37 @@ entry('./src/another.js')</code></pre>
 </div>
 </div>
     </div>
+
+    <aside class="sidebar main-toc medium-2 small-12 columns">
+      
+      
+      <h4><a href="https://venkatperi.github.io/webpkr-doc//">Home</a></h4>
+      <ul class="nav">
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//installation">Installation</a></li>
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//dsl-reference">DSL Reference</a></li>
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//api">API</a></li>
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//api/plugins">Plugin API</a></li>
+        
+        <li><a href="https://venkatperi.github.io/webpkr-doc//examples">Examples</a></li>
+        
+      </ul>
+      
+      
+      <div id="toc"></div>
+    </aside>
+
   </div>
 </div>
 
 <footer class="row">
   <div class="small-12 columns">
     <span class="build-info">
-    Build <span class="build-number">43</span>
-    &nbsp;&nbsp;|&nbsp;&nbsp; <span class="build-time">2017-08-11 02:32:29 +0000</span>
+    Build <span class="build-number">44</span>
+    &nbsp;&nbsp;|&nbsp;&nbsp; <span class="build-time">2017-08-11 16:40:27 +0000</span>
     </span>
   </div>
 </footer>
