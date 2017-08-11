@@ -1,8 +1,8 @@
 = Examples
+:showtitle:
 :page-permalink: /examples/
 
-== Examples
 
-- link:partition[Splitting Configuration into Multiple Files]
+- link:partition[Split Configuration into Multiple Files]
 - link:vendor-bundle[Explicit Vendor Bundle]
 - link:multi-env[Multiple Environments]

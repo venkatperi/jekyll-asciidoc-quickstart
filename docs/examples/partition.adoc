@@ -1,7 +1,6 @@
-= Example: Splitting Configuration into Multiple Files
+= Example: Split Configuration into Multiple Files
 :page-permalink: /examples/partition/
-
-== Example: Splitting Configuration into Multiple Files
+:showtitle:
 
 `webpkr` configurations can be split into multiple files. Simply `require` the parts like any other nodejs module.
 

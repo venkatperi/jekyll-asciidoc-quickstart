@@ -1,7 +1,6 @@
 = Example: Explicit Vendor Bundle
+:showtitle:
 :page-permalink: /examples/vendor-bundle/
-
-== Example: Explicit Vendor Bundle
 
 Creates a separate vendor bundle.
 

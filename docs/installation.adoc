@@ -1,4 +1,5 @@
 = Installation
+:showtitle:
 :page-permalink: /installation/
 
 == npm

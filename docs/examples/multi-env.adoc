@@ -1,10 +1,9 @@
 = Example: Multiple Environments
+:showtitle:
 :page-permalink: /examples/multi-env/
 
-== Example: Multiple Environments
-
-Instead of duplicating configuration for multiple environments (e.g. development/production), `webpkr`
-lets you specify configuration items for specific environments in the same configuration.
+* Webpkr lets you specify configuration items for all environments in the same configuration.
+* No need to duplicate configurations for multiple environments
 
 
 ```javascript

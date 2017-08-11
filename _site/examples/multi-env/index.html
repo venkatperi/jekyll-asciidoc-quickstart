@@ -29,35 +29,20 @@
 <!-- Main Page Content and Sidebar -->
 <div class="container">
   <div class="row">
-    <aside class="sidebar main-toc small-2 columns">
-      
-      
-      <h4><a href="http://localhost:3000//">Home</a></h4>
-      <ul class="nav">
-        
-        <li><a href="http://localhost:3000//installation">Installation</a></li>
-        
-        <li><a href="http://localhost:3000//dsl-reference">DSL Reference</a></li>
-        
-        <li><a href="http://localhost:3000//api">API</a></li>
-        
-        <li><a href="http://localhost:3000//api/plugins">Plugin API</a></li>
-        
-        <li><a href="http://localhost:3000//examples">Examples</a></li>
-        
-      </ul>
-      
-      
-      <div id="toc"></div>
-    </aside>
 
-    <div class="small-9 columns" role="content">
-      <div class="sect1">
-<h2 id="example_multiple_environments">Example: Multiple Environments</h2>
+    <div class="small-12 medium-9 columns" role="content">
+      <h1>Example: Multiple Environments</h1>
+<div id="preamble">
 <div class="sectionbody">
-<div class="paragraph">
-<p>Instead of duplicating configuration for multiple environments (e.g. development/production), <code>webpkr</code>
-lets you specify configuration items for specific environments in the same configuration.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>Webpkr lets you specify configuration items for all environments in the same configuration.</p>
+</li>
+<li>
+<p>No need to duplicate configurations for multiple environments</p>
+</li>
+</ul>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -98,6 +83,8 @@ production( () =&gt; {
 } )</code></pre>
 </div>
 </div>
+</div>
+</div>
 <div class="sect2">
 <h3 id="configure_webpack">Configure Webpack</h3>
 <div class="paragraph">
@@ -110,9 +97,30 @@ module.exports = webpkr({projectDir: __dirname});</code></pre>
 </div>
 </div>
 </div>
-</div>
-</div>
     </div>
+
+    <aside class="sidebar main-toc medium-2 small-12 columns">
+      
+      
+      <h4><a href="http://localhost:3000//">Home</a></h4>
+      <ul class="nav">
+        
+        <li><a href="http://localhost:3000//installation">Installation</a></li>
+        
+        <li><a href="http://localhost:3000//dsl-reference">DSL Reference</a></li>
+        
+        <li><a href="http://localhost:3000//api">API</a></li>
+        
+        <li><a href="http://localhost:3000//api/plugins">Plugin API</a></li>
+        
+        <li><a href="http://localhost:3000//examples">Examples</a></li>
+        
+      </ul>
+      
+      
+      <div id="toc"></div>
+    </aside>
+
   </div>
 </div>
 
@@ -120,7 +128,7 @@ module.exports = webpkr({projectDir: __dirname});</code></pre>
   <div class="small-12 columns">
     <span class="build-info">
     Build <span class="build-number">n/a</span>
-    &nbsp;&nbsp;|&nbsp;&nbsp; <span class="build-time">2017-08-10 21:53:41 -0400</span>
+    &nbsp;&nbsp;|&nbsp;&nbsp; <span class="build-time">2017-08-11 12:36:56 -0400</span>
     </span>
   </div>
 </footer>

@@ -8,63 +8,144 @@ Webpkr scripts are _configuration scripts_. As the script executes, it configure
 Under Development.
 
 == Script Structure
-A configuration script is made of up of multiple statements and script blocks. A script block inserts a new node in the the _configuration tree_ and takes optional parameters. If the final parameter is a closure, it is treated as a _configuration closure_ which configures the newly created node. Any optional parameters are available to the node during the subsequent evaluation phase.
+A configuration script is made of up of multiple statements and script blocks. A script block inserts a new node in the the _configuration tree_ and takes optional parameters.
 
+.Configuration Closure
+If the final parameter is a closure, it is treated as a _configuration closure_ which configures the newly created node. Any optional parameters are available to the node during the subsequent evaluation phase.
+
+```javascript
+// optional arguments
+block([{*}, ..., {*},] () => {
+    // configuration closure
+})
+```
+
+.Naming Convention
 Top level script blocks map to top level keys of the `webpack` configuration object. Where there is a potential clash of names (e.g. with `module` or `path`), the script block name is appended with a `$` symbol.
 
+.Plain Ol' JavaScript
 The build script is JavaScript code, and can contain any valid JavaScript, such as method definitions, `require` statements, classes etc.
 
-== Builder/Global Variables
+== Globals
 
-=== `projectDir`
+[.code-header]
+=== projectDir
+[.lead]
 The directory containing the project build file. Defaults to `process.cwd()`.
+
 ```javascript
 // webpack.config.js
 module.exports = require( 'webpkr' )( { projectDir: __dirname } );
 
 ```
-=== `buildDir`
+[.code-header]
+=== buildDir
+[.lead]
 The build directory of this project where all the output will be generated. Defaults to `projectDir/build`.
 
-== Environments
-`[development, production, testing, staging]`
+== multiple Environments
 
-Environment script blocks allow conditional inclusion (or exclusion) during the evaluation phase based on the value of the `NODE_ENV` environment variable. To do this, wrap the block in the desired environment moniker:
+[.lead]
+Environment script blocks allow conditional inclusion (or exclusion) during the evaluation phase based on the value of the `NODE_ENV` environment variable.
+
+
+[.code-header]
+=== development()
+Sub-blocks are evaluated only when `NODE_ENV=development`.
 
 ```javascript
 development( () => {
-    // this script block evaluated only when NODE_ENV=development
+  // development-only scripts
+})
+```
+
+[.code-header]
+=== production()
+Sub-blocks are evaluated only when `NODE_ENV=production`.
+
+```javascript
+production( () => {
+  // production-only scripts
+})
+```
+
+[.code-header]
+=== testing()
+Sub-blocks are evaluated only when `NODE_ENV=testing`.
+
+```javascript
+testing( () => {
+  // testing-only scripts
+})
+```
+
+[.code-header]
+=== staging()
+Sub-blocks are evaluated only when `NODE_ENV=staging`.
+
+```javascript
+staging( () => {
+  // staging-only scripts
 })
 ```
 
 == Evaluation Order
-`[doFirst, doLast]`
 
+[.lead]
 In some cases, it may be necessary to control the order the order of evaluation, e.g. to ensure the order of loading of css files.
 
-=== `doFirst()`
+[IMPORTANT]
+Do not depend solely on the position of a script block if order of evaluation is important.
+
+[.code-header]
+=== doFirst()
 Instructs the evaluation phase to evaluate the nodes contained within before other nodes.
 
-=== `doLast()`
+
+```javascript
+// ensures that base.css is loaded before style.css
+
+entry({main: './css/style.css'})
+
+doFirst( () => {
+  entry({main: './css/base.css'})
+})
+
+```
+
+
+[.code-header]
+=== doLast()
 Instructs the evaluation phase to evaluate the nodes contained within after other nodes.
+
+```javascript
+// ensures that style.css is loaded after base.css
+
+doLast( () => {
+  entry({main: './css/style.css'})
+})
+
+entry({main: './css/base.css'})
+```
 
 [NOTE]
 The order of evaluation within `doFirst` and `doLast` is not guaranteed.
 
 == Entry and Context
 
-=== `context( )`
+[.code-header]
+=== context( )
 `string`
 
 The base directory for resolving entry points and loaders from configuration. Relative paths are resolved from `projectDir`.
 
 ```javascript
-// context = projectDir/src
 context('src')
+// => projectDir/src
 ```
 
-
-=== `entry()`
+[.code-header]
+=== entry()
 `string | [string] | object { <key>: string | [string] }`
 
 The point or points to enter the application. See link:https://webpack.js.org/configuration/entry-context/#entry[entry]. Webpkr will merge multiple calls to `entry()`:
@@ -96,7 +177,7 @@ entry: [
 
 
 == Output
-
+[.lead]
 The top-level `output` script block configures `webpack` output settings.
 
 ```javascript
@@ -140,6 +221,7 @@ To avoid potential name clashes, `output.path` is available as `path$`.
 
 == Module
 
+[.lead]
 The top-level `module$` script block configures the `webpack` module key.
 
 ```javascript
@@ -149,9 +231,14 @@ module$( () => {
 } )
 ```
 
-`module$` provides the following script blocks:
+[NOTE]
+====
+To avoid name clashes, `output.path` is available as `path$`.
+====
 
-=== `rule()`
+
+[.code-header]
+=== rule()
 
 The `rule` script block defines a rule which is matched to requests when modules are created. Rule blocks are grouped into the `module.rules` array during the evaluation phase.
 

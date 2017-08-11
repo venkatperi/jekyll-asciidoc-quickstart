@@ -9,7 +9,7 @@ Plugins are an easy way to extend core webpkr functionality:
 - Extend or mutate build objects.
 
 
-== class BasePlugin
+== class webpkr.PluginBase
 
 Base class from which plugins are derived.
 

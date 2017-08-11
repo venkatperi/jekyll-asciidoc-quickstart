@@ -29,7 +29,12 @@
 <!-- Main Page Content and Sidebar -->
 <div class="container">
   <div class="row">
-    <aside class="sidebar main-toc small-2 columns">
+
+    <div class="small-12 medium-9 columns" role="content">
+      {{ content }}
+    </div>
+
+    <aside class="sidebar main-toc medium-2 small-12 columns">
       {% for nav in site.data.sidebar %}
       {% if nav.items != null %}
       <h4><a href="{{ baseUrl }}{{ nav.href }}">{{ nav.title }}</a></h4>
@@ -43,9 +48,6 @@
       <div id="toc"></div>
     </aside>
 
-    <div class="small-9 columns" role="content">
-      {{ content }}
-    </div>
   </div>
 </div>
 
