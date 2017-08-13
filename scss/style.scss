@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Inconsolata:400,700|Titillium+Web:300,400,600,700');
+@import url( 'https://fonts.googleapis.com/css?family=Inconsolata:400,700|Titillium+Web:300,400,600,700');
 
 $text-color: #333;
 $font-size: 1.05rem;
@@ -9,17 +9,27 @@ $page-width: 960px;
 $dashed-border: dashed 1px #e6e6e6;
 $code-background-color: #f5f5f5;
 
-body{
+body {
   margin-top: 50px;
 }
 
-body, p, h1, h2, h3, h4, h5, h6, ul, li {
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+p,
+ul {
   color: $text-color;
   font-family: "Titillium Web", sans-serif;
 }
 
 table tr {
-  td, th {
+  td,
+  th {
     font-size: $font-size;
   }
 }
@@ -44,7 +54,8 @@ p {
   font-size: $font-size;
 }
 
-.lead, .args {
+.args,
+.lead {
   font-size: $lead-font-size;
 }
 
@@ -57,7 +68,7 @@ h1 {
 h2 {
   font-weight: 600;
   font-size: 2.5em;
-  border-bottom:  $dashed-border;
+  border-bottom: $dashed-border;
 }
 
 h3 {
@@ -66,7 +77,7 @@ h3 {
   border-bottom: $dashed-border;
 }
 
-h4{
+h4 {
   font-weight: 700;
   font-size: $font-size;
 }
@@ -75,7 +86,6 @@ h5 {
   font-weight: 700;
   font-size: $font-size;
 }
-
 
 .sect2 + .sect2 {
   margin-top: 50px;
@@ -90,7 +100,10 @@ h5 {
 }
 
 .code-header {
-  &> h2, &>h3,&> h4, &>h5  {
+  & > h2,
+  & > h3,
+  & > h4,
+  & > h5 {
     font-weight: 300;
     margin-bottom: 15px;
     padding-bottom: 5px;
@@ -102,11 +115,11 @@ h5 {
     margin-top: 50px;
   }
 
-  &> h3 {
+  & > h3 {
     font-size: 1.9em;
   }
 
-  &> h4 {
+  & > h4 {
     font-size: 1.8em;
   }
 }
@@ -115,9 +128,11 @@ table.options {
   td {
     padding: 1px 10px;
   }
+
   code {
     font-size: 1em;
   }
+
   p {
     font-size: 0.95em;
     margin-bottom: 0;
@@ -138,6 +153,7 @@ code {
 
 .listingblock pre {
   border: none;
+
   &[class] {
     border: none;
   }
@@ -146,21 +162,26 @@ code {
 .sidebar {
   padding-top: 1em;
   padding-left: 0;
+
   a {
     color: #0f2634;
   }
+
   h4 {
     border: none;
     margin-bottom: 0;
   }
+
   ul {
     padding: 0;
     margin-left: 0;
     margin-bottom: 25px;
   }
+
   li {
     list-style: none;
     padding: 3px 0;
+
     a {
       color: #0f2634;
     }
@@ -184,29 +205,32 @@ li {
   background: #102633;
   height: 50px;
   padding: 0 50px;
+
   .icon {
     color: white;
     font-size: 2em;
     padding-top: 10px;
   }
+
   h1 {
     border: none;
   }
 }
 
 footer {
-  .build-info{
+  .build-info {
     color: #b3b3b3;
     font-size: 0.5em;
   }
 
 }
-
 @media only screen and (max-width: 40em) {
-  .container, .sidebar {
+  .container,
+  .sidebar {
     margin-left: 15px;
   }
-  .top-bar{
+
+  .top-bar {
     padding: 0 15px;
   }
 }
